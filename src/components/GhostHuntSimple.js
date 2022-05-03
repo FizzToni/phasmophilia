@@ -104,10 +104,31 @@ const ghostOrbs    = <ScatterPlotOutlined/>;
 const emf5         = <SpeakerPhoneOutlined/>;
 const dots         = <BlurOnOutlined/>;
 
-const spirit = [ghostWriting, emf5, spiritBox];
+const banshee = [dots, ghostOrbs, fingerPrints];
+const demon = [ghostWriting, fingerPrints, freezingTemp];
+const goryo = [dots, emf5, fingerPrints];
+const hantu = [ghostOrbs, fingerPrints, freezingTemp];
+const jinn = [emf5, fingerPrints, freezingTemp];
+const mare = [ghostWriting, ghostOrbs, spiritBox];
+const myling = [ghostWriting, emf5, fingerPrints];
+const obake = [emf5, ghostOrbs, fingerPrints];
+const oni = [dots, emf5, freezingTemp];
+const onryo = [ghostOrbs, fingerPrints, spiritBox];
+const phantom = [dots, fingerPrints, spiritBox];
 const poltergeist = [ghostWriting, fingerPrints, spiritBox];
+const raiju = [dots, emf5, ghostOrbs];
 const revenant = [ghostWriting, ghostOrbs, freezingTemp];
-const demon = [ghostWriting, fingerPrints, freezingTemp]
+const shade = [ghostWriting, emf5, spiritBox];
+const spirit = [ghostWriting, emf5, spiritBox];
+const the_mimic = [fingerPrints, freezingTemp, spiritBox];
+const the_twins = [emf5, freezingTemp, spiritBox];
+const wraith = [dots, emf5, spiritBox];
+const yokai = [dots, ghostOrbs, spiritBox];
+const yurei = [dots, ghostOrbs, freezingTemp];
+
+
+
+
 
 
 export default function MiniDrawer() {
@@ -368,9 +389,13 @@ export default function MiniDrawer() {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
+                        <Divider><Chip label="Speed"/></Divider>
                         <Typography>
-                            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-                            Aliquam eget maximus est, id dignissim quam.
+                            During a hunt, if any player is in the LoS of the Revenant, it will move at approximately twice the standard ghost speed. If nobody is in LoS, it will move at approximately half the standard speed.
+                        </Typography>
+                        <Divider><Chip label="Footsteps"/></Divider>
+                        <Typography>
+                            Players can listen to its footstep sounds when hiding from the ghost; if it is comparatively slow, then it may be a Revenant. Note that footstep sounds are approximately synced with ghost speed, so players should be listening for footstep sounds that occur approximately half as often.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
@@ -387,9 +412,50 @@ export default function MiniDrawer() {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
+                        <Divider><Chip label="Interactions"/></Divider>
                         <Typography>
-                            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-                            Aliquam eget maximus est, id dignissim quam.
+                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                        </Typography>
+                        <Divider><Chip label="Multi-throw"/></Divider>
+                        <Typography>
+                            Poltergeists can also move multiple objects at once, which will decrease nearby players' sanity; the decrease is by 2% times the number of objects moved.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel5'} onChange={handleAccordionChange('panel5')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Banshee</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {banshee}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Obsession"/></Divider>
+                        <Typography>
+                            During hunts, a Banshee can only notice, chase, or kill one person at a time. If a hunting ghost seems to ignore nearby players to look for or chase a distant player, then the ghost is likely a Banshee; if it passes through one or more players without killing them while not under the effect of Smudge Sticks, a Banshee can be confirmed outright.
+                            <br/>
+                            If the Banshee's main target is not in the investigation area, it will chase and attempt to kill anyone it sees.
+                        </Typography>
+                        <Divider><Chip label="Sanity Level"/></Divider>
+                        <Typography>
+                            Banshees will only check their target's sanity level to initiate a hunt as opposed to the team's average sanity. A ghost being excessively aggressive (hunting often) despite a relatively high average sanity level, and vice-versa, might indicate a Banshee.
+                        </Typography>
+                        <Divider><Chip label="Roaming"/></Divider>
+                        <Typography>
+                            Banshees tend to roam towards the target player outside of hunts; ghost activity occuring more often than usual near a specific player and away from the ghost room is a good sign of a Banshee.
+                        </Typography>
+                        <Divider><Chip label="Singing"/></Divider>
+                        <Typography>
+                            A Banshee is more likely to perform ghost events where it sings over other types of ghost events.
+                        </Typography>
+                        <Divider><Chip label="Shriek"/></Divider>
+                        <Typography>
+                            Banshees have a chance of emitting a unique type of shriek-like paranormal sounds on the parabolic microphone. Any player can consider taking one and aiming it in the general area of the ghost.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
