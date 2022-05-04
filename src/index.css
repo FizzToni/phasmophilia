@@ -27,3 +27,7 @@ code {
   width: 100px;
   border: 1px solid red;
 }
+
+.MuiTypography-root {
+  padding-block: 0.5rem;
+}

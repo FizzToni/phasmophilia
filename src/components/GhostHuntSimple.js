@@ -13,21 +13,18 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 
 import {
-    AcUnitOutlined, BlurOnOutlined, ErrorOutline, ErrorOutlined, MenuBookOutlined,
-    MicOffOutlined, PanTool,
-    PanToolOutlined,
-    PersonSearch, RestartAltRounded,
+    AcUnitOutlined, BlurOnOutlined, ErrorOutline, MenuBookOutlined,
+    MicOffOutlined,
+    PanToolOutlined, RestartAltRounded,
     ScatterPlotOutlined, SmokeFreeOutlined,
     SpeakerPhoneOutlined, ExpandMoreRounded
 } from "@mui/icons-material";
 
 import {Accordion, ListSubheader, AccordionSummary, AccordionDetails, Chip} from "@mui/material";
+import {grey} from "@mui/material/colors";
 
 const drawerWidth = 240;
 
@@ -126,9 +123,7 @@ const wraith = [dots, emf5, spiritBox];
 const yokai = [dots, ghostOrbs, spiritBox];
 const yurei = [dots, ghostOrbs, freezingTemp];
 
-
-
-
+let ghosts = [ banshee, demon, goryo, hantu, jinn, mare, myling, obake, oni, onryo, phantom, poltergeist, raiju, revenant, shade, spirit, the_mimic, the_twins, wraith, yokai, yurei ];
 
 
 export default function MiniDrawer() {
@@ -146,6 +141,19 @@ export default function MiniDrawer() {
     const [expanded, setExpanded] = React.useState(false);
     const handleAccordionChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
+    };
+
+    let ev_state = false;
+    const [possibleGhost, setPossibleGhost] = React.useState(false);
+    const handleEvidenceSelection = (ev_id) => {
+
+        console.log("You found " + ev_id);
+        if (!ev_state) {
+            ev_state = true;
+        } else {
+            ev_state = false;
+        }
+        setPossibleGhost(ev_state);
     };
 
     return (
@@ -183,7 +191,9 @@ export default function MiniDrawer() {
                             {open ?  'Evidences' : 'EV'}
                         </ListSubheader>
                     }>
+
                     <ListItemButton
+                        onClick={() => handleEvidenceSelection( 1)}
                         sx={{
                             minHeight: 48,
                             justifyContent: open ? 'initial' : 'center',
@@ -196,6 +206,7 @@ export default function MiniDrawer() {
                         }}/>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Fingerprints"/>
                     </ListItemButton>
+
                     <ListItemButton
                         sx={{
                             minHeight: 48,
@@ -209,6 +220,7 @@ export default function MiniDrawer() {
                         }}/>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Freezing Temperatures"/>
                     </ListItemButton>
+
                     <ListItemButton
                         sx={{
                             minHeight: 48,
@@ -235,6 +247,7 @@ export default function MiniDrawer() {
                         }}/>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="EMF 5"/>
                     </ListItemButton>
+
                     <ListItemButton
                         sx={{
                             minHeight: 48,
@@ -248,6 +261,7 @@ export default function MiniDrawer() {
                         }}/>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="D.O.T.S."/>
                     </ListItemButton>
+
                     <ListItemButton
                         sx={{
                             minHeight: 48,
@@ -261,6 +275,7 @@ export default function MiniDrawer() {
                         }}/>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Ghost Writings"/>
                     </ListItemButton>
+
                     <ListItemButton
                         sx={{
                             minHeight: 48,
@@ -274,6 +289,7 @@ export default function MiniDrawer() {
                         }}/>
                         <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Spirit Box"/>
                     </ListItemButton>
+
                 </List>
                 <Divider/>
                 <List
@@ -325,23 +341,43 @@ export default function MiniDrawer() {
                     </ListItemButton>
                 </List>
             </Drawer>
+
             <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
                 <DrawerHeader/>
-                <Accordion expanded={expanded === 'panel1'} onChange={handleAccordionChange('panel1')}>
+
+                <Accordion expanded={expanded === 'panel5'} onChange={handleAccordionChange('panel5')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
                     >
-                        <Typography sx={{ flexShrink: 0 }}>Spirit</Typography>
+                        <Typography sx={{ flexShrink: 0 }}>Banshee</Typography>
                         <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
-                            {spirit}
+                            {banshee}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
+                        <Divider><Chip label="Obsession"/></Divider>
                         <Typography>
-                            <Divider><Chip label="Smudging"/></Divider>
-                            When smudged, spirits will not hunt for 180 seconds, as opposed to the standard 90 seconds. When testing for a Spirit, ensure that your average sanity is below 50% by reading it off the sanity monitor, or checking that it has hunted (or attempted to hunt) at least once. Then, smudge the ghost and count for 180 seconds. If the ghost hunts within 90 to 180 seconds, then it is not a Spirit. If it only hunts after the 180 seconds are up, then it is likely be a Spirit. To ensure that the smudge does not fail (causing the ghost to hunt much earlier than 90 seconds), wait for it to first use the crucifix, interact with an object, or use a motion sensor to locate it, then smudge the surrounding area.
+                            During hunts, a Banshee can only notice, chase, or kill one person at a time. If a hunting ghost seems to ignore nearby players to look for or chase a distant player, then the ghost is likely a Banshee; if it passes through one or more players without killing them while not under the effect of Smudge Sticks, a Banshee can be confirmed outright.
+                            <br/>
+                            If the Banshee's main target is not in the investigation area, it will chase and attempt to kill anyone it sees.
+                        </Typography>
+                        <Divider><Chip label="Sanity Level"/></Divider>
+                        <Typography>
+                            Banshees will only check their target's sanity level to initiate a hunt as opposed to the team's average sanity. A ghost being excessively aggressive (hunting often) despite a relatively high average sanity level, and vice-versa, might indicate a Banshee.
+                        </Typography>
+                        <Divider><Chip label="Roaming"/></Divider>
+                        <Typography>
+                            Banshees tend to roam towards the target player outside of hunts; ghost activity occuring more often than usual near a specific player and away from the ghost room is a good sign of a Banshee.
+                        </Typography>
+                        <Divider><Chip label="Singing"/></Divider>
+                        <Typography>
+                            A Banshee is more likely to perform ghost events where it sings over other types of ghost events.
+                        </Typography>
+                        <Divider><Chip label="Shriek"/></Divider>
+                        <Typography>
+                            Banshees have a chance of emitting a unique type of shriek-like paranormal sounds on the parabolic microphone. Any player can consider taking one and aiming it in the general area of the ghost.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
@@ -377,25 +413,237 @@ export default function MiniDrawer() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel3'} onChange={handleAccordionChange('panel3')}>
+                <Accordion expanded={expanded === 'panel6'} onChange={handleAccordionChange('panel6')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
                     >
-                        <Typography sx={{ flexShrink: 0 }}>Revenant</Typography>
+                        <Typography sx={{ flexShrink: 0 }}>Goryo</Typography>
                         <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
-                            {revenant}
+                            {goryo}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="D.O.T.S."/></Divider>
+                        <Typography>
+                            You will only be able to see the Goryo produce a D.O.T.S Projector-based silhouette through a video camera, and if there are no people in the ghost room. If a player sees the ghost interact with the projector on the camera or on the Video Feed, but the players at the location do not see it, then the ghost is likely a Goryo.
+
+                            Standing outside of the ghost room will suffice for allowing the ghost to appear through the projector.
+                            Note that its power does not apply to physical manifestations during a ghost event or a hunt; Goryos can physically manifest and be fully visible in this manner like any other ghost.
+                        </Typography>
+                        <Divider><Chip label="Roaming"/></Divider>
+                        <Typography>
+                            When not hunting, Goryo are less likely to roam around, and consequently stay in its ghost room more often. If the ghost tends to remain in its ghost room, including at the start of ghost events and hunts, with interactions mainly confined to the area in and around the ghost room, then it could be a Goryo.                        </Typography>
+                        <Divider><Chip label="Nightmare"/></Divider>
+                        <Typography>
+                            On Nightmare difficulty, the Goryo will always provide D.O.T.S projector as one of its two evidences. Not obtaining this piece of evidence in Nightmare rules the ghost out.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel7'} onChange={handleAccordionChange('panel7')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Hantu</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {hantu}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Divider><Chip label="Speed"/></Divider>
                         <Typography>
-                            During a hunt, if any player is in the LoS of the Revenant, it will move at approximately twice the standard ghost speed. If nobody is in LoS, it will move at approximately half the standard speed.
+                            During a hunt, the Hantu has different speeds in rooms of different temperatures; it is fastest in cold rooms below 3°C (37.4°F) and slowest in warm rooms above 15°C (59°F). Additionally, the Hantu does not accelerate with line-of-sight, unlike most other ghosts. This may make it easy to identify in an extended chase, asides from possibly making it easier to escape if the room is warm enough. If you can easily loop the ghost without crouching in a warm room around a large furniture piece such as a kitchen counter, then the ghost is most likely a Hantu.
                         </Typography>
-                        <Divider><Chip label="Footsteps"/></Divider>
+                        <Divider><Chip label="Fuse"/></Divider>
                         <Typography>
-                            Players can listen to its footstep sounds when hiding from the ghost; if it is comparatively slow, then it may be a Revenant. Note that footstep sounds are approximately synced with ghost speed, so players should be listening for footstep sounds that occur approximately half as often.
+                            Hantu are twice more likely to turn off the fuse box; frequent outages might be a sign of a Hantu. On the other hand, Hantu will not turn the fuse box on; having the ghost turn the fuse box on eliminates Hantu as a possibility.
+                        </Typography>
+                        <Divider><Chip label="Breath"/></Divider>
+                        <Typography>
+                            Hantu will also emit freezing breath in rooms below 3°C (37.4°F) when it manifests during a hunt. Note that this breath is visible only when the ghost is also physically visible, making it harder to see as the breath may be partially obscured by the ghost model.
+                        </Typography>
+                        <Divider><Chip label="Nightmare"/></Divider>
+                        <Typography>
+                            On Nightmare difficulty, the Hantu will always provide Freezing Temperatures as one of its two evidences. Not obtaining this piece of evidence in Nightmare rules the ghost out.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel9'} onChange={handleAccordionChange('panel9')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Mare</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {mare}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel10'} onChange={handleAccordionChange('panel10')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Myling</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {myling}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel11'} onChange={handleAccordionChange('panel11')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Obake</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {obake}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel12'} onChange={handleAccordionChange('panel12')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Oni</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {oni}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel13'} onChange={handleAccordionChange('panel13')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Onryo</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {onryo}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel14'} onChange={handleAccordionChange('panel14')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Phantom</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {phantom}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
@@ -423,39 +671,264 @@ export default function MiniDrawer() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel5'} onChange={handleAccordionChange('panel5')}>
+                <Accordion expanded={expanded === 'panel3'} onChange={handleAccordionChange('panel3')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
                     >
-                        <Typography sx={{ flexShrink: 0 }}>Banshee</Typography>
+                        <Typography sx={{ flexShrink: 0 }}>Revenant</Typography>
                         <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
-                            {banshee}
+                            {revenant}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Divider><Chip label="Obsession"/></Divider>
+                        <Divider><Chip label="Speed"/></Divider>
                         <Typography>
-                            During hunts, a Banshee can only notice, chase, or kill one person at a time. If a hunting ghost seems to ignore nearby players to look for or chase a distant player, then the ghost is likely a Banshee; if it passes through one or more players without killing them while not under the effect of Smudge Sticks, a Banshee can be confirmed outright.
-                            <br/>
-                            If the Banshee's main target is not in the investigation area, it will chase and attempt to kill anyone it sees.
+                            During a hunt, if any player is in the LoS of the Revenant, it will move at approximately twice the standard ghost speed. If nobody is in LoS, it will move at approximately half the standard speed.
                         </Typography>
-                        <Divider><Chip label="Sanity Level"/></Divider>
+                        <Divider><Chip label="Footsteps"/></Divider>
                         <Typography>
-                            Banshees will only check their target's sanity level to initiate a hunt as opposed to the team's average sanity. A ghost being excessively aggressive (hunting often) despite a relatively high average sanity level, and vice-versa, might indicate a Banshee.
+                            Players can listen to its footstep sounds when hiding from the ghost; if it is comparatively slow, then it may be a Revenant. Note that footstep sounds are approximately synced with ghost speed, so players should be listening for footstep sounds that occur approximately half as often.
                         </Typography>
-                        <Divider><Chip label="Roaming"/></Divider>
-                        <Typography>
-                            Banshees tend to roam towards the target player outside of hunts; ghost activity occuring more often than usual near a specific player and away from the ghost room is a good sign of a Banshee.
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel15'} onChange={handleAccordionChange('panel15')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Raiju</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {raiju}
                         </Typography>
-                        <Divider><Chip label="Singing"/></Divider>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Interactions"/></Divider>
                         <Typography>
-                            A Banshee is more likely to perform ghost events where it sings over other types of ghost events.
+                            Poltergeists tend to interact with objects much more frequently than other ghosts.
                         </Typography>
-                        <Divider><Chip label="Shriek"/></Divider>
+                        <Divider><Chip label="Interactions"/></Divider>
                         <Typography>
-                            Banshees have a chance of emitting a unique type of shriek-like paranormal sounds on the parabolic microphone. Any player can consider taking one and aiming it in the general area of the ghost.
+                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                        </Typography>
+                        <Divider><Chip label="Interactions"/></Divider>
+                        <Typography>
+                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel16'} onChange={handleAccordionChange('panel16')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Shade</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {shade}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Interactions"/></Divider>
+                        <Typography>
+                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                        </Typography>
+                        <Divider><Chip label="Interactions"/></Divider>
+                        <Typography>
+                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                        </Typography>
+                        <Divider><Chip label="Interactions"/></Divider>
+                        <Typography>
+                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                        </Typography>
+                        <Divider><Chip label="Interactions"/></Divider>
+                        <Typography>
+                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                        </Typography>
+                        <Divider><Chip label="Interactions"/></Divider>
+                        <Typography>
+                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel1'}
+                           onChange={handleAccordionChange('panel1')}
+                           hidden={possibleGhost}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Spirit</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {spirit}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            <Divider><Chip label="Smudging"/></Divider>
+                            When smudged, spirits will not hunt for 180 seconds, as opposed to the standard 90 seconds. When testing for a Spirit, ensure that your average sanity is below 50% by reading it off the sanity monitor, or checking that it has hunted (or attempted to hunt) at least once. Then, smudge the ghost and count for 180 seconds. If the ghost hunts within 90 to 180 seconds, then it is not a Spirit. If it only hunts after the 180 seconds are up, then it is likely be a Spirit. To ensure that the smudge does not fail (causing the ghost to hunt much earlier than 90 seconds), wait for it to first use the crucifix, interact with an object, or use a motion sensor to locate it, then smudge the surrounding area.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel17'} onChange={handleAccordionChange('panel17')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>The Mimic</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {the_mimic}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Interactions"/></Divider>
+                        <Typography>
+                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                        </Typography>
+                        <Divider><Chip label="Interactions"/></Divider>
+                        <Typography>
+                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                        </Typography>
+                        <Divider><Chip label="Interactions"/></Divider>
+                        <Typography>
+                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel18'} onChange={handleAccordionChange('panel18')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>The Twins</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {the_twins}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Evidence"/></Divider>
+                        <Typography>
+                            As the name implies, The Twins effectively functions as two separate entities, though code-wise it is only one. The "main" Twin can provide all three pieces of evidence, while the "decoy" Twin can only give EMF Level 5, and cannot be detected with motion sensors. Noticing multiple disturbances far away from the ghost room but failing to get any response on the Spirit Box or reading any significant temperature drop in the vicinity is a likely indicator of the decoy Twin causing disturbances.
+                        </Typography>
+                        <Divider textAlign={"left"}>Tip</Divider>
+                        <Typography>
+                            Similarly, if there are motion sensors nearby, noticing interactions or even a ghost event occuring in the area but without the motion sensor ever being set off is a potential sign that it is the decoy Twin.
+                        </Typography>
+                        <Divider textAlign={"left"}>Tip</Divider>
+                        <Typography>
+                            Note that interactions for all ghosts happen in a radius confined to the same floor. This means that any ghost could interact through the wall. Having two interactions at reasonably different times in adjacent rooms does not necessarily indicate that the ghost is The Twins.
+                        </Typography>
+                        <Divider><Chip label="Interactions"/></Divider>
+                        <Typography>
+                            The Twins have a chance of interacting with the environment almost simultaneously; noticing two interactions occuring in very quick succession at two separate locations, and this happening relatively frequently, is a very strong sign of The Twins. However, this may easily go unnoticed if players are strictly focused on investigating in or around the ghost room, as the decoy Twin could possibly be far away from the "main" Twin. Leaving an active EMF reader inside the ghost room while doing something else might potentially help players identify Twins if an interaction is noticed somewhere and the EMF reader is heard going off inside the ghost room at the same time.
+                        </Typography>
+                        <Divider textAlign={"left"}>Tip</Divider>
+                        <Typography>
+                            If Twins are suspected, searching around the building for items that have been displaced or thrown on the floor or lights that have been unexpectedly turned on far away for the ghost room might help narrow down the ghost type. Note that this is more useful before the ghost has had the chance to hunt; ghosts can throw objects during hunts, so be careful not to be misled.
+                        </Typography>
+                        <Divider><Chip label="Hunt Start"/></Divider>
+                        <Typography>
+                            When The Twins attempt to initate a hunt, there is a 50% chance of it to occur at the main Twin, and a 50% chance for it to occur from the Twin that last interacted with the environment. This means that Twins can hunt while they are far from one another. Noticing a hunt starting unusually far away from the ghost room or multiple hunts each occuring in vastly different locations might be a sign of The Twins.
+                        </Typography>
+                        <Divider textAlign={"left"}>Tip</Divider>
+                        <Typography>
+                            Note that crucifixes will only check for the main Twin when blocking hunts, regardless of which Twin attempted hunting. A hunt starting close to a working crucifix is a strong sign that it is the second Twin of the pair hunting.
+                        </Typography>
+                        <Divider><Chip label="Speed"/></Divider>
+                        <Typography>
+                            Each Twin has a different moving speed during hunts. The main Twin will be 10% slower than the standard ghost speed while the secondary Twin will be 10% faster. Noticing a subtle change in speed from one hunt to another might narrow down the ghost type.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel8'} onChange={handleAccordionChange('panel8')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Wraith</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {wraith}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="No Footprints"/></Divider>
+                        <Typography>
+                            Wraiths do not leave UV footprints when walking through salt, though they will still leave an imprint in the salt pile and can still create footstep sounds. After the ghost has stepped in salt, if it creates multiple footstep sounds but not prints, then it is very likely a Wraith.
+                        </Typography>
+                        <Divider><Chip label="Interactions"/></Divider>
+                        <Typography>
+                            The Wraith stepping in salt also temporarily increases the average rate of interactions.
+                        </Typography>
+                        <Divider><Chip label="Teleport"/></Divider>
+                        <Typography>
+                            Wraiths can teleport to a player outside hunts, generating an EMF Level 2 or 5 reading. If there is no other interaction nearby that would have caused an EMF 2/5 reading, it is possible that the ghost is a Wraith.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel19'} onChange={handleAccordionChange('panel19')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Yokai</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {yokai}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Early Hunter"/></Divider>
+                        <Typography>
+                            While players are talking near the Yokai, its hunt sanity threshold will be increased to 80%, else it will have the normal 50% threshold.
+                        </Typography>
+                        <Divider><Chip label="Senseless"/></Divider>
+                        <Typography>
+                            During hunts, a Yokai can only sense voices and electronics within a 2-meter range. On Nightmare difficulty, this can be tested by standing into a room with a smudge stick handy (ideally far away from the door) and talking into the microphone or holding an active electronic equipment. If the ghost is nearby with no line-of-sight but does not enter the player's room despite the potential attraction, it is a good sign that it might be a Yokai. Be aware though that the ghost might also simply walk into the room by pure chance when roaming; multiple attempts might be needed to conclusively confirm or rule out the type of ghost.
+                        </Typography>
+                        <Divider><Chip label="Interactions"/></Divider>
+                        <Typography>
+                            Continuously talking near a Yokai will increase the chance of interactions taking place.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel20'} onChange={handleAccordionChange('panel20')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Yurei</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {yurei}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Door Closing"/></Divider>
+                        <Typography>
+                            The Yurei has a special ability where it will drop all the sanity of all players within 7.5 meters of it by 13%, while also closing a door sharply at the same time. Noticing a door sharply close from being fully open is a very strong sign of a Yurei.
+                            Keep in mind that this ability does not count as an actual ghost event and Yurei can still perform regular ghost events like any other ghost.
+                        </Typography>
+                        <Divider><Chip label="Ghost Event"/></Divider>
+                        <Typography>
+                            The Yurei prefers ghost events where it hisses over other types of ghost events.
+                        </Typography>
+                        <Divider><Chip label="Smudging"/></Divider>
+                        <Typography>
+                            Using a smudge stick near the Yurei will prevent the ghost from wandering out of its ghost room for 90 seconds. Players can try placing a Motion Sensor at the doorway, and proceed to smudge the ghost. If the motion sensor is never set off by the ghost within the next 90 seconds, then the ghost could be a Yurei.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
