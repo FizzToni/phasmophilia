@@ -24,7 +24,6 @@ import {
 } from "@mui/icons-material";
 
 import {Accordion, ListSubheader, AccordionSummary, AccordionDetails, Chip} from "@mui/material";
-import {grey} from "@mui/material/colors";
 
 const drawerWidth = 240;
 
@@ -122,8 +121,6 @@ const the_twins = [emf5, freezingTemp, spiritBox];
 const wraith = [dots, emf5, spiritBox];
 const yokai = [dots, ghostOrbs, spiritBox];
 const yurei = [dots, ghostOrbs, freezingTemp];
-
-let ghosts = [ banshee, demon, goryo, hantu, jinn, mare, myling, obake, oni, onryo, phantom, poltergeist, raiju, revenant, shade, spirit, the_mimic, the_twins, wraith, yokai, yurei ];
 
 
 export default function MiniDrawer() {
@@ -345,7 +342,7 @@ export default function MiniDrawer() {
             <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
                 <DrawerHeader/>
 
-                <Accordion expanded={expanded === 'panel5'} onChange={handleAccordionChange('panel5')}>
+                <Accordion expanded={expanded === 'panel00'} onChange={handleAccordionChange('panel00')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -382,7 +379,7 @@ export default function MiniDrawer() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel2'} onChange={handleAccordionChange('panel2')}>
+                <Accordion expanded={expanded === 'panel01'} onChange={handleAccordionChange('panel01')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -413,7 +410,7 @@ export default function MiniDrawer() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel6'} onChange={handleAccordionChange('panel6')}>
+                <Accordion expanded={expanded === 'panel02'} onChange={handleAccordionChange('panel02')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -442,7 +439,7 @@ export default function MiniDrawer() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel7'} onChange={handleAccordionChange('panel7')}>
+                <Accordion expanded={expanded === 'panel03'} onChange={handleAccordionChange('panel03')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -473,7 +470,34 @@ export default function MiniDrawer() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel9'} onChange={handleAccordionChange('panel9')}>
+                <Accordion expanded={expanded === 'panel04'} onChange={handleAccordionChange('panel04')}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreRounded />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ flexShrink: 0 }}>Jinn</Typography>
+                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                            {jinn}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Divider><Chip label="Sanity"/></Divider>
+                        <Typography>
+                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                        </Typography>
+                        <Divider><Chip label="Speed"/></Divider>
+                        <Typography>
+                            If the breaker is on during a hunt and player is in the line of sight of the Jinn, it will chase the player at twice their regular speed until they are within about 2 meters of the player, thereafter chasing with the default speed. This can be tested by standing at the end of a long hallway or room, then waiting for the ghost to achieve line-of-sight from the other end. If its speed increases instantly and not over a period of time, then it is likely a Jinn. Be careful not to confuse this with the Revenant; the Jinn's speed is normal if it is not chasing a player, unlike the Revenant.
+                        </Typography>
+                        <Divider><Chip label="Breaker"/></Divider>
+                        <Typography>
+                            Both of the abilities listed above can be disabled by turning off the breaker. Consequently, a Jinn never turns the fuse box off by itself, though the breaker can still be tripped by overloading it with lights. If the breaker is not turned off despite high ghost activity for a long period of time, the ghost could be a Jinn, though this should not be used as definitive proof. Conversely, if the ghost turns the breaker off directly, it cannot be a Jinn.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion expanded={expanded === 'panel05'} onChange={handleAccordionChange('panel05')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -485,34 +509,34 @@ export default function MiniDrawer() {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Early Hunter"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            Mares have an increased hunting threshold of 60% if the lights in its room are off. On the other hand, turning on the lights on in its room will decrease its sanity threshold to 40%.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Lights"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            Mares have a chance of turning the lights off immediately if a player turns one on in the vicinity. Spamming the light switch will not trigger this interaction, so this is best utilized with some time between switching the lights on/off. This interaction will give off an EMF 2 reading. Note that any ghost can do so purely by coincidence. Ghost events do not count for this ability.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Interactions"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            Mares will have decreased interaction activity if its current room is lit.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Lights"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            Mares never turn individual lights on; a ghost doing so confirms that it is not a Mare. Mares do not have any special mechanic regarding fuse boxes, and can turn them on or off.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Shattering Lights"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            Mares are more likely to choose manifestation events where it shatters the lights, rendering them unusable.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Roamer"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            Mares have a high chance to roam long ranges if the lights are on in the room.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel10'} onChange={handleAccordionChange('panel10')}>
+                <Accordion expanded={expanded === 'panel06'} onChange={handleAccordionChange('panel06')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -524,19 +548,19 @@ export default function MiniDrawer() {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Quiet Hunter"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            Mylings have quieter footsteps than other ghosts during a hunt. Throw any electronic equipment on the ground next to the player and listen; if footsteps can only be heard within the range that electronics begin to flicker (about 10 meters), then the ghost may be a Myling. This test only applies when the ghost is on the same floor as the player.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Frequent Sounds"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            Players can hear paranormal sounds, such as murmuring or growling, by pointing a Parabolic Microphone at an idle ghost. If these sounds are more frequent than usual, the ghost may be a Myling.
                         </Typography>
 
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel11'} onChange={handleAccordionChange('panel11')}>
+                <Accordion expanded={expanded === 'panel07'} onChange={handleAccordionChange('panel07')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -548,22 +572,22 @@ export default function MiniDrawer() {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Fingerprints"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            When an Obake interacts with a surface that allows for fingerprints, there is a 75% chance that it will leave fingerprints, as opposed to the 100% chance for all other ghosts. Seperately, Obake may also use an ability that halves the remaining duration of existing fingerprints on the map, potentially causing them to disappear within seconds of appearing.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Shape Shift"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            In addition, there is a 16.6% chance that it will leave a special fingerprint not seen with other ghosts. These consist of having six-fingered handprints instead of five, two fingerprints on light switches instead of one, and five fingerprints on keyboards and Prison cell block gates instead of four.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Nightmare"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            On Nightmare difficulty, the Obake will always provide Fingerprints as one of its two evidences. Not obtaining this piece of evidence in Nightmare rules the ghost out.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel12'} onChange={handleAccordionChange('panel12')}>
+                <Accordion expanded={expanded === 'panel08'} onChange={handleAccordionChange('panel08')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -575,22 +599,22 @@ export default function MiniDrawer() {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Ghost Events"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            Oni are more active and will cause frequent ghost events and interactions to happen. In the smallest maps such as Tanglewood Street House, if the ghost performs ghost events almost as if it were all around the house, it may be an Oni.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Interactions"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            Oni have an ability that, when used, allows it to throw an item at a higher speed and with more height.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Ghost Events"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            An Oni will also never cause ghost events where it appears as a smoke and hisses at a player. An Oni can be ruled out if the ghost does such an event. The Oni can still hiss as part of a manifestation ghost event.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel13'} onChange={handleAccordionChange('panel13')}>
+                <Accordion expanded={expanded === 'panel09'} onChange={handleAccordionChange('panel09')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -602,22 +626,22 @@ export default function MiniDrawer() {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Early Hunter"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            The Onryo has a 60% hunt sanity threshold if there are no flames near it.
                         </Typography>
                         <Divider><Chip label="Sanity"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            Onryo have a 50%<Typography variant={"caption text"}>verify</Typography> chance of hunting regardless of sanity when any flame is extinguished by the ghost. For every dead player, this chance increases; the chance is almost 100% when two people are dead.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Crucifix"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            An Onryo will prioritize blowing out a flame instead of using a crucifix. This can be tested for by placing a crucifix down, and multiple lit candles in close proximity; if the candles repeatedly go out without the ghost ever hunting nor the crucifix ever burning, even at low average sanity, the ghost may be an Onryo. On the other hand, if the crucifix burns without any nearby candle being extinguished, the ghost is not an Onryo.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel14'} onChange={handleAccordionChange('panel14')}>
+                <Accordion expanded={expanded === 'panel10'} onChange={handleAccordionChange('panel10')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -629,26 +653,26 @@ export default function MiniDrawer() {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Photo"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            Taking a photo of a Phantom will make it instantly and temporarily disappear for that specific instance that it appears. This will not stop a manifestation nor a hunt if one is already in progress. In a ghost event, if the ghost disappeared as the picture was taken but his footsteps and vocalizations can still be heard, it means that it is a Phantom.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider textAlign={"left"}>Journal</Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            The ghost's physical image will not be visible in the picture found in the journal, but will be labelled as a "Ghost" picture. Additionally, the image will appear without any electronic interference. However, any ghost can have the same effect if the photo is taken right at the end of a ghost event; be sure that the ghost event is still ongoing even when the ghost has disappeared.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Flickering"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            During a hunt, a Phantom will flash visible every 1 to 2 seconds as opposed to every 0.3 to 1 seconds for other ghosts. Watch for the ghost's flickering rate; if it is invisible for longer periods of time, it is likely a Phantom.
                         </Typography>
-                        <Divider><Chip label="Sanity"/></Divider>
+                        <Divider><Chip label="Teleport"/></Divider>
                         <Typography>
-                            Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.
+                            The Phantom also has an ability very similar to the Wraith's, which it can use (not during a manifestation) to walk to a random player's location regardless of distance. After this, the Phantom will continue normal activity.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel4'} onChange={handleAccordionChange('panel4')}>
+                <Accordion expanded={expanded === 'panel11'} onChange={handleAccordionChange('panel11')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -671,7 +695,7 @@ export default function MiniDrawer() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel3'} onChange={handleAccordionChange('panel3')}>
+                <Accordion expanded={expanded === 'panel12'} onChange={handleAccordionChange('panel12')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -694,7 +718,7 @@ export default function MiniDrawer() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel15'} onChange={handleAccordionChange('panel15')}>
+                <Accordion expanded={expanded === 'panel13'} onChange={handleAccordionChange('panel13')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -706,22 +730,22 @@ export default function MiniDrawer() {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Divider><Chip label="Interactions"/></Divider>
+                        <Divider><Chip label="Early Hunter"/></Divider>
                         <Typography>
-                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                            Rajius can hunt from an average sanity of 65% if there are active electronics near it.
                         </Typography>
-                        <Divider><Chip label="Interactions"/></Divider>
+                        <Divider><Chip label="Speed"/></Divider>
                         <Typography>
-                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                            The presence of any active electronics near the Raiju will also cause it to gain significant speed during a hunt, almost equal to that of a Revenant. Having a ghost that is moving quickly visually and audially in the presence of electronics and even while not chasing someone may indicate that the ghost is a Raiju.
                         </Typography>
-                        <Divider><Chip label="Interactions"/></Divider>
+                        <Divider><Chip label="Electronics"/></Divider>
                         <Typography>
-                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                            During ghost events and hunts, the Raiju will interfere with electronics at a longer range than the average 10 meters for every other ghost. This distance only applies to electronics that are on the same floor as the ghost.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel16'} onChange={handleAccordionChange('panel16')}>
+                <Accordion expanded={expanded === 'panel14'} onChange={handleAccordionChange('panel14')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -735,30 +759,28 @@ export default function MiniDrawer() {
                     <AccordionDetails>
                         <Divider><Chip label="Interactions"/></Divider>
                         <Typography>
-                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                            Shades will perform little to no activity in the presence of players in its room. Additionally, the chance of ghost events is tied to average sanity; the success rate of ghost events will increase gradually as sanity decays, capping at 50% where an attempted ghost event will always succeed.
                         </Typography>
-                        <Divider><Chip label="Interactions"/></Divider>
+                        <Divider><Chip label="Shy Hunter"/></Divider>
                         <Typography>
-                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                            Shades will not hunt in the presence of at least one player in the same room as it. A ghost not hunting with players in the same room may be a Shade, though it is possible for the Shade to wander out of its room, before hunting.
                         </Typography>
-                        <Divider><Chip label="Interactions"/></Divider>
+                        <Divider><Chip label="Late Hunter"/></Divider>
                         <Typography>
-                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                            Shades have a very low hunting sanity threshold, which is at only 35%. If the average sanity of the team is very low but hunts remain relatively sparse or do not occur at all, it might be a sign that the ghost is a Shade.
                         </Typography>
-                        <Divider><Chip label="Interactions"/></Divider>
+                        <Divider><Chip label="Ghost Event"/></Divider>
                         <Typography>
-                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                            Shades tend to prefer the mist-type "hissing" ghost event over manifesting. If it does manifest, it will prefer (though not always have) the shadow-type ghost form.
                         </Typography>
-                        <Divider><Chip label="Interactions"/></Divider>
+                        <Divider><Chip label="Summoning Circle"/></Divider>
                         <Typography>
-                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                            If summoned by a Summoning Circle, a Shade has a chance[verify]will appear as a shadow in the circle instead of a fully visible form.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel1'}
-                           onChange={handleAccordionChange('panel1')}
-                           hidden={possibleGhost}>
+                <Accordion expanded={expanded === 'panel15'} onChange={handleAccordionChange('panel15')} hidden={possibleGhost}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -770,14 +792,14 @@ export default function MiniDrawer() {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
+                        <Divider><Chip label="Smudging"/></Divider>
                         <Typography>
-                            <Divider><Chip label="Smudging"/></Divider>
                             When smudged, spirits will not hunt for 180 seconds, as opposed to the standard 90 seconds. When testing for a Spirit, ensure that your average sanity is below 50% by reading it off the sanity monitor, or checking that it has hunted (or attempted to hunt) at least once. Then, smudge the ghost and count for 180 seconds. If the ghost hunts within 90 to 180 seconds, then it is not a Spirit. If it only hunts after the 180 seconds are up, then it is likely be a Spirit. To ensure that the smudge does not fail (causing the ghost to hunt much earlier than 90 seconds), wait for it to first use the crucifix, interact with an object, or use a motion sensor to locate it, then smudge the surrounding area.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel17'} onChange={handleAccordionChange('panel17')}>
+                <Accordion expanded={expanded === 'panel16'} onChange={handleAccordionChange('panel16')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -789,22 +811,22 @@ export default function MiniDrawer() {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Divider><Chip label="Interactions"/></Divider>
+                        <Divider><Chip label="Evidence"/></Divider>
                         <Typography>
-                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                            The Mimic presents Ghost Orbs as a fourth evidence (or third evidence in Nightmare difficulty). Conclusively identifying two of The Mimic's main evidences plus Ghost Orbs in Nightmare difficulty confirms that the ghost is The Mimic. On the contrary, if you managed to obtain only one or two (depending on difficulty) of The Mimic's primary evidences and a Ghost Orb, be sure that the ghost doesn't give off another piece of evidence to safely rule out The Mimic.
                         </Typography>
-                        <Divider><Chip label="Interactions"/></Divider>
+                        <Divider><Chip label="Abilities"/></Divider>
                         <Typography>
-                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                            The Mimic also has the ability to replicate other ghosts' abilities, such as the Obake's six-fingered handprint, or hunting sanity thresholds. This could be used against it if it presents an ability while also showing contradicting evidence (such as leaving a six-fingered handprint but creating freezing temperatures, which the Obake does not provide as evidence).
                         </Typography>
-                        <Divider><Chip label="Interactions"/></Divider>
+                        <Divider><Chip label="Mimic"/></Divider>
                         <Typography>
-                            Poltergeists tend to interact with objects much more frequently than other ghosts.
+                            The Mimic will occasionally change the ghost it decides to impersonate during the mission. This might betray The Mimic if the player notices the ghost demonstrating two completely different traits (such as noticing the ghost flickering slower like a Phantom during a hunt, when it was not doing so earlier). Note that the Mimic cannot switch traits during a hunt.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel18'} onChange={handleAccordionChange('panel18')}>
+                <Accordion expanded={expanded === 'panel17'} onChange={handleAccordionChange('panel17')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
@@ -851,7 +873,7 @@ export default function MiniDrawer() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel8'} onChange={handleAccordionChange('panel8')}>
+                <Accordion expanded={expanded === 'panel18'} onChange={handleAccordionChange('panel18')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreRounded />}
                         aria-controls="panel1bh-content"
