@@ -360,7 +360,7 @@ export default function MiniDrawer() {
                             <br/>
                             If the Banshee's main target is not in the investigation area, it will chase and attempt to kill anyone it sees.
                         </Typography>
-                        <Divider><Chip label="Sanity Level"/></Divider>
+                        <Divider><Chip label="Sanity"/></Divider>
                         <Typography>
                             Banshees will only check their target's sanity level to initiate a hunt as opposed to the team's average sanity. A ghost being excessively aggressive (hunting often) despite a relatively high average sanity level, and vice-versa, might indicate a Banshee.
                         </Typography>
