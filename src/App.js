@@ -1,12 +1,12 @@
 import './App.css';
-import NewView from "./components/NewView";
-import GhostHuntSimple from "./components/GhostHuntSimple"
+import GhostView from "./components/GhostView";
+import MainView from "./components/MainView"
 
 
 function App() {
   return (
     <div className="App">
-        <NewView />
+        <MainView />
     </div>
   );
 }
