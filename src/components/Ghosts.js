@@ -47,6 +47,7 @@ const yurei_evidences       = [freezingTemp,    ghostOrbs,      dots];
 
 // Ghost Info
 const banshee = new Object();
+banshee.id = 0;
 banshee.name = 'Banshee';
 banshee.evidences = banshee_evidences;
 banshee.tags = ['obsession', 'sanity', 'roaming', 'singing', 'shriek'];
@@ -59,6 +60,7 @@ banshee.behaviour = [
 ];
 
 const demon = new Object();
+demon.id = 1;
 demon.name = 'Demon';
 demon.evidences = demon_evidences;
 demon.tags = ['early hunter', 'hunt cooldown', 'crucifix', 'smudging'];
@@ -70,6 +72,7 @@ demon.behaviour = [
 ];
 
 const goryo = new Object();
+goryo.id = 2;
 goryo.name = 'Goryo';
 goryo.evidences = goryo_evidences;
 goryo.tags = ['D.O.T.S.', 'roaming', 'nightmare'];
@@ -80,6 +83,7 @@ goryo.behaviour = [
 ];
 
 const hantu = new Object();
+hantu.id = 3;
 hantu.name = 'Hantu';
 hantu.evidences = hantu_evidences;
 hantu.tags = ['speed', 'fuse', 'breath', 'nightmare'];
@@ -91,6 +95,7 @@ hantu.behaviour = [
 ];
 
 const jinn = new Object();
+jinn.id = 4;
 jinn.name = 'Jinn';
 jinn.evidences = jinn_evidences;
 jinn.tags = ['sanity', 'speed', 'fuse'];
@@ -102,6 +107,7 @@ jinn.behaviour = [
 
 
 const mare = new Object();
+mare.id = 5;
 mare.name = 'Mare';
 mare.evidences = mare_evidences;
 mare.tags = ['early hunter', 'lights', 'interactions', 'lights', 'shattering lights', 'roamer'];
@@ -115,6 +121,7 @@ mare.behaviour = [
 ];
 
 const myling = new Object();
+myling.id = 6;
 myling.name = 'Myling';
 myling.evidences = myling_evidences;
 myling.tags = ['quiet hunter', 'frequent sounds'];
@@ -124,6 +131,7 @@ myling.behaviour = [
 ];
 
 const obake = new Object();
+obake.id = 7;
 obake.name = 'Obake';
 obake.evidences = obake_evidences;
 obake.tags = ['fingerprints', 'shape shifter', 'nightmare'];
@@ -134,6 +142,7 @@ obake.behaviour = [
 ];
 
 const oni = new Object();
+oni.id = 8;
 oni.name = 'Oni';
 oni.evidences = oni_evidences;
 oni.tags = ['ghost events', 'interactions', 'ghost events'];
@@ -144,6 +153,7 @@ oni.behaviour = [
 ];
 
 const onryo = new Object();
+onryo.id = 9;
 onryo.name = 'Onryo';
 onryo.evidences = onryo_evidences;
 onryo.tags = ['early hunter', 'sanity', 'crucifix'];
@@ -154,6 +164,7 @@ onryo.behaviour = [
 ];
 
 const phantom = new Object();
+phantom.id = 10;
 phantom.name = 'Phantom';
 phantom.evidences = phantom_evidences;
 phantom.tags = ['photo', 'flickering', 'teleport'];
@@ -167,6 +178,7 @@ phantom.behaviour = [
 ];
 
 const poltergeist = new Object();
+poltergeist.id = 11;
 poltergeist.name = 'Poltergeist';
 poltergeist.evidences = poltergeist_evidences;
 poltergeist.tags = ['interactions', 'multi-throw'];
@@ -176,6 +188,7 @@ poltergeist.behaviour = [
 ];
 
 const raiju = new Object();
+raiju.id = 12;
 raiju.name = 'Raiju';
 raiju.evidences = raiju_evidences;
 raiju.tags = ['early hunter', 'speed', 'electronics'];
@@ -186,6 +199,7 @@ raiju.behaviour = [
 ];
 
 const revenant = new Object();
+revenant.id = 13;
 revenant.name = 'Revenant';
 revenant.evidences = revenant_evidences;
 revenant.tags = ['speed', 'footsteps'];
@@ -195,6 +209,7 @@ revenant.behaviour = [
 ];
 
 const shade = new Object();
+shade.id = 14;
 shade.name = 'Shade';
 shade.evidences = shade_evidences;
 shade.tags = ['interactions', 'shy hunter', 'late hunter', 'ghost events', 'summoning circle'];
@@ -207,6 +222,7 @@ shade.behaviour = [
 ];
 
 const spirit = new Object();
+spirit.id = 15;
 spirit.name = 'Spirit';
 spirit.evidences = spirit_evidences;
 spirit.tags = ['smudging'];
@@ -216,6 +232,7 @@ spirit.behaviour = [
 
 
 const the_mimic = new Object();
+the_mimic.id = 16;
 the_mimic.name = 'The Mimic';
 the_mimic.evidences = the_mimic_evidences;
 the_mimic.tags = ['evidence', 'abilities', 'mimic'];
@@ -226,6 +243,7 @@ the_mimic.behaviour = [
 ];
 
 const the_twins = new Object();
+the_twins.id = 17;
 the_twins.name = 'The Twins';
 the_twins.evidences = the_twins_evidences;
 the_twins.tags = ['evidence', 'interactions', 'hunt start', 'speed'];
@@ -249,6 +267,7 @@ the_twins.behaviour = [
 ];
 
 const wraith = new Object();
+wraith.id = 18;
 wraith.name = 'Wraith';
 wraith.evidences = wraith_evidences;
 wraith.tags = ['no footprints', 'interactions', 'teleport'];
@@ -259,6 +278,7 @@ wraith.behaviour = [
 ];
 
 const yokai = new Object();
+yokai.id = 19;
 yokai.name = 'Yokai';
 yokai.evidences = yokai_evidences;
 yokai.tags = ['early hunter', 'senseless', 'interactions'];
@@ -269,6 +289,7 @@ yokai.behaviour = [
 ];
 
 const yurei = new Object();
+yurei.id = 20;
 yurei.name = 'Yurei';
 yurei.evidences = yurei_evidences;
 yurei.tags = ['door closing', 'ghost event', 'smudging'];
@@ -282,34 +303,25 @@ yurei.behaviour = [
 export const ghost_list = [banshee, demon, goryo, hantu, jinn, mare, myling, obake, oni, onryo, phantom, poltergeist, raiju, revenant, shade, spirit, the_mimic, the_twins, wraith, yokai, yurei];
 
 // Functions
+export function get_all_ghosts() {
+    return ghost_list;
+}
 
 export function get_ghost(name) {
     let ghost = ghost_list.find(function(ghost) {
         return ghost.name.toUpperCase() === name.toUpperCase();
     });
     return(
-        <Accordion expanded={true}>
-            <AccordionSummary
-                expandIcon={<ExpandMoreRounded />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-            >
-                <Typography sx={{ flexShrink: 0 }}>{ghost.name}</Typography>
-                <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
-                    {ghost.evidences}
-                </Typography>
-            </AccordionSummary>
+        ghost
+    );
+}
 
-            <AccordionDetails>
-                {ghost_details(ghost).map(function(detail, idx){
-                    return (
-                        <div key={idx}>
-                            {detail}
-                        </div>
-                    )
-                })}
-            </AccordionDetails>
-        </Accordion>
+export function get_ghost_from_evidence(evidence) {
+    let ghost = ghost_list.find(function(ghost) {
+        return ghost.evidences.includes(evidence);
+    });
+    return(
+        ghost
     );
 }
 
