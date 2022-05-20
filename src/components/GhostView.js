@@ -8,19 +8,11 @@ import Typography from "@mui/material/Typography";
 let ghost_list = [];
 let collected_evidence = [];
 
-function init_ghost_hunt() {
+export function init_ghost_hunt() {
     ghost_list = (ghosts.get_all_ghosts());
 }
 
-//CRUD
-function add_ghost_by_name(name) {
-    let ghost = get_ghost(name);
-    if (ghost) {
-        ghost_list.push(ghost);
-    }
-}
 export function manage_evidence_collection(evidence_id) {
-    console.log("Found : " + evidence_id);
     if (collected_evidence.includes(evidence_id)) {
         const index = collected_evidence.indexOf(evidence_id);
         collected_evidence.splice(index, 1);
@@ -28,30 +20,18 @@ export function manage_evidence_collection(evidence_id) {
     else {
         collected_evidence.push(evidence_id);
     }
-    console.log("Evidence collected by now: " + collected_evidence);
-    filter_ghosts_by_evidence()
-}
-
-function filter_ghosts_by_evidence() {
+    console.log("Current evidence: " + collected_evidence);
     ghost_list.forEach(function (ghost) {
+        ghost.possibility = 0;
         collected_evidence.forEach(function (evidence) {
             if (ghost.evidence.includes(evidence)) {
-                ghost.possibility = 1;
-            }
-            else {
-                ghost.possibility = 0;
+                ghost.possibility++;
             }
         });
-        console.log("Checking ghost: " + ghost.name + " chance:" + ghost.possibility);
+        console.log(ghost.name + ": " + ghost.possibility);
     });
 }
 
-function remove_ghost_by_name(name) {
-    let ghost = get_ghost(name);
-    if (ghost) {
-        ghost_list.splice(ghost);
-    }
-}
 
 
 const Ghosts = () => {
@@ -62,13 +42,12 @@ const Ghosts = () => {
     };
 
     init_ghost_hunt();
-    console.log(ghost_list);
 
     return (
         <div>
             {ghost_list.map(function (ghost) {
                 return (
-                    <Accordion expanded={expanded === "panel"+(ghost.id)} onChange={handleAccordionChange("panel"+(ghost.id))}>
+                    <Accordion expanded={expanded === "panel"+(ghost.id)} hidden={ghost.possibility < collected_evidence.length} onChange={handleAccordionChange("panel"+(ghost.id))}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreRounded />}
                             aria-controls="panel1bh-content"

@@ -25,6 +25,7 @@ import {
 
 import {Accordion, ListSubheader, AccordionSummary, AccordionDetails, Chip} from "@mui/material";
 import GhostView, {manage_evidence_collection} from "./GhostView";
+import {ghost_details} from "./Ghosts";
 
 const drawerWidth = 240;
 
@@ -141,12 +142,30 @@ export default function MiniDrawer() {
         setExpanded(isExpanded ? panel : false);
     };
 
-    let ev_state = false;
-    const [possibleGhost, setPossibleGhost] = React.useState(false);
     const handleEvidenceSelection = (ev_id) => {
         console.log("Evidence id:" + ev_id);
         manage_evidence_collection(ev_id);
     };
+
+/*    function manage_evidence_collection(evidence_id) {
+        if (collected_evidence.includes(evidence_id)) {
+            const index = collected_evidence.indexOf(evidence_id);
+            collected_evidence.splice(index, 1);
+        }
+        else {
+            collected_evidence.push(evidence_id);
+        }
+        console.log("Current evidence: " + collected_evidence);
+        ghost_list.forEach(function (ghost) {
+            ghost.possibility = 0;
+            collected_evidence.forEach(function (evidence) {
+                if (ghost.evidence.includes(evidence)) {
+                    ghost.possibility++;
+                }
+            });
+            console.log(ghost.name + ": " + ghost.possibility);
+        });
+    }*/
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -345,7 +364,6 @@ export default function MiniDrawer() {
                 <DrawerHeader/>
 
                 <GhostView/>
-
 
             </Box>
         </Box>
