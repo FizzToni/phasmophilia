@@ -23,11 +23,9 @@ import {
     SpeakerPhoneOutlined, ExpandMoreRounded
 } from "@mui/icons-material";
 
-import {Accordion, ListSubheader, AccordionSummary, AccordionDetails, Chip} from "@mui/material";
-import {get_ghost, get_ghosts_by_evidence, ghost_details} from "./Ghosts";
+import {Accordion, ListSubheader, AccordionSummary, AccordionDetails} from "@mui/material";
+import {ghost_details} from "./Ghosts";
 import * as ghosts from "./Ghosts";
-import {useEffect} from "react";
-
 
 const drawerWidth = 240;
 
@@ -95,16 +93,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
         }),
     }),
 );
-
-const ghostWriting = <MenuBookOutlined/>;
-const fingerPrints = <PanToolOutlined/>;
-const freezingTemp = <AcUnitOutlined/>;
-const spiritBox    = <MicOffOutlined/>;
-const ghostOrbs    = <ScatterPlotOutlined/>;
-const emf5         = <SpeakerPhoneOutlined/>;
-const dots         = <BlurOnOutlined/>;
-
-
 
 let ghost_list = [];
 let collected_evidence = [];
@@ -361,6 +349,7 @@ export default function MiniDrawer() {
 
                 <div>
                     {ghost_list.map(function (ghost) {
+                        // noinspection JSValidateTypes
                         return (
                             <Accordion expanded={expanded === "panel"+(ghost.id)} hidden={!(chance === ghost.possibility)} onChange={handleAccordionChange("panel"+(ghost.id))}>
                                 <AccordionSummary
