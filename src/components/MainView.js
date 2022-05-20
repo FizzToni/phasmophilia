@@ -24,8 +24,10 @@ import {
 } from "@mui/icons-material";
 
 import {Accordion, ListSubheader, AccordionSummary, AccordionDetails, Chip} from "@mui/material";
-import GhostView, {manage_evidence_collection} from "./GhostView";
-import {ghost_details} from "./Ghosts";
+import {get_ghost, get_ghosts_by_evidence, ghost_details} from "./Ghosts";
+import * as ghosts from "./Ghosts";
+import {useEffect} from "react";
+
 
 const drawerWidth = 240;
 
@@ -102,30 +104,38 @@ const ghostOrbs    = <ScatterPlotOutlined/>;
 const emf5         = <SpeakerPhoneOutlined/>;
 const dots         = <BlurOnOutlined/>;
 
-const banshee = [dots, ghostOrbs, fingerPrints];
-const demon = [ghostWriting, fingerPrints, freezingTemp];
-const goryo = [dots, emf5, fingerPrints];
-const hantu = [ghostOrbs, fingerPrints, freezingTemp];
-const jinn = [emf5, fingerPrints, freezingTemp];
-const mare = [ghostWriting, ghostOrbs, spiritBox];
-const myling = [ghostWriting, emf5, fingerPrints];
-const obake = [emf5, ghostOrbs, fingerPrints];
-const oni = [dots, emf5, freezingTemp];
-const onryo = [ghostOrbs, fingerPrints, spiritBox];
-const phantom = [dots, fingerPrints, spiritBox];
-const poltergeist = [ghostWriting, fingerPrints, spiritBox];
-const raiju = [dots, emf5, ghostOrbs];
-const revenant = [ghostWriting, ghostOrbs, freezingTemp];
-const shade = [ghostWriting, emf5, spiritBox];
-const spirit = [ghostWriting, emf5, spiritBox];
-const the_mimic = [fingerPrints, freezingTemp, spiritBox];
-const the_twins = [emf5, freezingTemp, spiritBox];
-const wraith = [dots, emf5, spiritBox];
-const yokai = [dots, ghostOrbs, spiritBox];
-const yurei = [dots, ghostOrbs, freezingTemp];
 
+
+let ghost_list = [];
+let collected_evidence = [];
+
+export function init_ghost_hunt() {
+    ghost_list = (ghosts.get_all_ghosts());
+}
+
+export function manage_evidence_collection(evidence_id) {
+    if (collected_evidence.includes(evidence_id)) {
+        const index = collected_evidence.indexOf(evidence_id);
+        collected_evidence.splice(index, 1);
+    }
+    else {
+        collected_evidence.push(evidence_id);
+    }
+    console.clear();
+    console.log("collected evidence: " + collected_evidence + "\ncollected_evidence.length: " + collected_evidence.length);
+    ghost_list.forEach(function (ghost) {
+        ghost.possibility = 0;
+        collected_evidence.forEach(function (evidence) {
+            if (ghost.evidence.includes(evidence)) {
+                ghost.possibility++;
+            }
+        });
+        console.log(ghost.name + ": " + ghost.possibility);
+    });
+}
 
 export default function MiniDrawer() {
+    init_ghost_hunt();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -142,30 +152,16 @@ export default function MiniDrawer() {
         setExpanded(isExpanded ? panel : false);
     };
 
+    const [chance, setChance] = React.useState(0);
     const handleEvidenceSelection = (ev_id) => {
-        console.log("Evidence id:" + ev_id);
         manage_evidence_collection(ev_id);
+        setChance(collected_evidence.length);
+        console.log("chance: " + chance);
     };
 
-/*    function manage_evidence_collection(evidence_id) {
-        if (collected_evidence.includes(evidence_id)) {
-            const index = collected_evidence.indexOf(evidence_id);
-            collected_evidence.splice(index, 1);
-        }
-        else {
-            collected_evidence.push(evidence_id);
-        }
-        console.log("Current evidence: " + collected_evidence);
-        ghost_list.forEach(function (ghost) {
-            ghost.possibility = 0;
-            collected_evidence.forEach(function (evidence) {
-                if (ghost.evidence.includes(evidence)) {
-                    ghost.possibility++;
-                }
-            });
-            console.log(ghost.name + ": " + ghost.possibility);
-        });
-    }*/
+    const handleReset = () => {
+        window.location.reload();
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -180,8 +176,7 @@ export default function MiniDrawer() {
                         sx={{
                             marginRight: 5,
                             ...(open && { display: 'none' }),
-                        }}
-                    >
+                        }}>
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
@@ -345,6 +340,7 @@ export default function MiniDrawer() {
                     </ListItemButton>
                     <Divider/>
                     <ListItemButton
+                        onClick={() => handleReset()}
                         sx={{
                             minHeight: 48,
                             justifyContent: open ? 'initial' : 'center',
@@ -363,7 +359,34 @@ export default function MiniDrawer() {
             <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
                 <DrawerHeader/>
 
-                <GhostView/>
+                <div>
+                    {ghost_list.map(function (ghost) {
+                        return (
+                            <Accordion expanded={expanded === "panel"+(ghost.id)} hidden={!(chance === ghost.possibility)} onChange={handleAccordionChange("panel"+(ghost.id))}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreRounded />}
+                                    aria-controls="panel1bh-content"
+                                    id="panel1bh-header">
+
+                                    <Typography sx={{ flexShrink: 0, minWidth: 100, textAlign: 'left' }}>{ghost.name}</Typography>
+                                    <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                                        {ghost.evidences_icons}
+                                    </Typography>
+                                </AccordionSummary>
+
+                                <AccordionDetails>
+                                    {ghost_details(ghost).map(function(detail, idx){
+                                        return (
+                                            <div key={idx}>
+                                                {detail}
+                                            </div>
+                                        )
+                                    })}
+                                </AccordionDetails>
+                            </Accordion>
+                        )
+                    })}
+                </div>
 
             </Box>
         </Box>

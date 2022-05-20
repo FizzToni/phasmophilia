@@ -83,7 +83,7 @@ banshee.behaviour = [
     "A Banshee is more likely to perform ghost events where it sings over other types of ghost events.",
     "Banshees have a chance of emitting a unique type of shriek-like paranormal sounds on the parabolic microphone. Any player can consider taking one and aiming it in the general area of the ghost."
 ];
-banshee.possibility = 1;
+banshee.possibility = 0;
 
 const demon = new Object();
 demon.id = 1;
@@ -97,7 +97,7 @@ demon.behaviour = [
     "Crucifixes have an effective range of 5 meters instead of the standard 3 meters. Having a lazily placed crucifix burn when the ghost would normally not have used it may indicate a Demon, though this strategy is flawed by the fact that ghosts may happen to wander out of their room and into the crucifix's range.",
     "Smudging a Demon will prevent it from hunting for only 60 seconds, as opposed to 90 seconds with most other ghosts."
 ];
-demon.possibility = 1;
+demon.possibility = 0;
 
 const goryo = new Object();
 goryo.id = 2;
@@ -110,7 +110,7 @@ goryo.behaviour = [
     "When not hunting, Goryo are less likely to roam around, and consequently stay in its ghost room more often. If the ghost tends to remain in its ghost room, including at the start of ghost events and hunts, with interactions mainly confined to the area in and around the ghost room, then it could be a Goryo. ",
     "On Nightmare difficulty, the Goryo will always provide D.O.T.S projector as one of its two evidences. Not obtaining this piece of evidence in Nightmare rules the ghost out."
 ];
-goryo.possibility = 1;
+goryo.possibility = 0;
 
 const hantu = new Object();
 hantu.id = 3;
@@ -124,7 +124,7 @@ hantu.behaviour = [
     "Hantu will also emit freezing breath in rooms below 3°C (37.4°F) when it manifests during a hunt. Note that this breath is visible only when the ghost is also physically visible, making it harder to see as the breath may be partially obscured by the ghost model.",
     "On Nightmare difficulty, the Hantu will always provide Freezing Temperatures as one of its two evidences. Not obtaining this piece of evidence in Nightmare rules the ghost out."
 ];
-hantu.possibility = 1;
+hantu.possibility = 0;
 
 const jinn = new Object();
 jinn.id = 4;
@@ -137,7 +137,7 @@ jinn.behaviour = [
     "If the breaker is on during a hunt and player is in the line of sight of the Jinn, it will chase the player at twice their regular speed until they are within about 2 meters of the player, thereafter chasing with the default speed. This can be tested by standing at the end of a long hallway or room, then waiting for the ghost to achieve line-of-sight from the other end. If its speed increases instantly and not over a period of time, then it is likely a Jinn. Be careful not to confuse this with the Revenant; the Jinn's speed is normal if it is not chasing a player, unlike the Revenant.",
     "Both of the abilities listed above can be disabled by turning off the breaker. Consequently, a Jinn never turns the fuse box off by itself, though the breaker can still be tripped by overloading it with lights. If the breaker is not turned off despite high ghost activity for a long period of time, the ghost could be a Jinn, though this should not be used as definitive proof. Conversely, if the ghost turns the breaker off directly, it cannot be a Jinn."
 ];
-jinn.possibility = 1;
+jinn.possibility = 0;
 
 
 const mare = new Object();
@@ -154,7 +154,7 @@ mare.behaviour = [
     "Mares are more likely to choose manifestation events where it shatters the lights, rendering them unusable.",
     "Mares have a high chance to roam long ranges if the lights are on in the room."
 ];
-mare.possibility = 1;
+mare.possibility = 0;
 
 const myling = new Object();
 myling.id = 6;
@@ -166,7 +166,7 @@ myling.behaviour = [
     "Mylings have quieter footsteps than other ghosts during a hunt. Throw any electronic equipment on the ground next to the player and listen; if footsteps can only be heard within the range that electronics begin to flicker (about 10 meters), then the ghost may be a Myling. This test only applies when the ghost is on the same floor as the player.",
     "Players can hear paranormal sounds, such as murmuring or growling, by pointing a Parabolic Microphone at an idle ghost. If these sounds are more frequent than usual, the ghost may be a Myling."
 ];
-myling.possibility = 1;
+myling.possibility = 0;
 
 const obake = new Object();
 obake.id = 7;
@@ -179,7 +179,7 @@ obake.behaviour = [
     "In addition, there is a 16.6% chance that it will leave a special fingerprint not seen with other ghosts. These consist of having six-fingered handprints instead of five, two fingerprints on light switches instead of one, and five fingerprints on keyboards and Prison cell block gates instead of four.",
     "On Nightmare difficulty, the Obake will always provide Fingerprints as one of its two evidences. Not obtaining this piece of evidence in Nightmare rules the ghost out."
 ];
-obake.possibility = 1;
+obake.possibility = 0;
 
 const oni = new Object();
 oni.id = 8;
@@ -192,7 +192,7 @@ oni.behaviour = [
     "Oni have an ability that, when used, allows it to throw an item at a higher speed and with more height.",
     "An Oni will also never cause ghost events where it appears as a smoke and hisses at a player. An Oni can be ruled out if the ghost does such an event. The Oni can still hiss as part of a manifestation ghost event."
 ];
-oni.possibility = 1;
+oni.possibility = 0;
 
 const onryo = new Object();
 onryo.id = 9;
@@ -205,7 +205,7 @@ onryo.behaviour = [
     "Onryo have a 50%verify chance of hunting regardless of sanity when any flame is extinguished by the ghost. For every dead player, this chance increases; the chance is almost 100% when two people are dead.",
     "An Onryo will prioritize blowing out a flame instead of using a crucifix. This can be tested for by placing a crucifix down, and multiple lit candles in close proximity; if the candles repeatedly go out without the ghost ever hunting nor the crucifix ever burning, even at low average sanity, the ghost may be an Onryo. On the other hand, if the crucifix burns without any nearby candle being extinguished, the ghost is not an Onryo."
 ];
-onryo.possibility = 1;
+onryo.possibility = 0;
 
 const phantom = new Object();
 phantom.id = 10;
@@ -221,7 +221,7 @@ phantom.behaviour = [
     "During a hunt, a Phantom will flash visible every 1 to 2 seconds as opposed to every 0.3 to 1 seconds for other ghosts. Watch for the ghost's flickering rate; if it is invisible for longer periods of time, it is likely a Phantom.",
     "The Phantom also has an ability very similar to the Wraith's, which it can use (not during a manifestation) to walk to a random player's location regardless of distance. After this, the Phantom will continue normal activity."
 ];
-phantom.possibility = 1;
+phantom.possibility = 0;
 
 const poltergeist = new Object();
 poltergeist.id = 11;
@@ -233,7 +233,7 @@ poltergeist.behaviour = [
     "Poltergeists tend to interact with objects much more frequently than other ghosts.",
     "Poltergeists can also move multiple objects at once, which will decrease nearby players' sanity; the decrease is by 2% times the number of objects moved."
 ];
-poltergeist.possibility = 1;
+poltergeist.possibility = 0;
 
 const raiju = new Object();
 raiju.id = 12;
@@ -246,7 +246,7 @@ raiju.behaviour = [
     "The presence of any active electronics near the Raiju will also cause it to gain significant speed during a hunt, almost equal to that of a Revenant. Having a ghost that is moving quickly visually and audially in the presence of electronics and even while not chasing someone may indicate that the ghost is a Raiju.",
     "During ghost events and hunts, the Raiju will interfere with electronics at a longer range than the average 10 meters for every other ghost. This distance only applies to electronics that are on the same floor as the ghost."
 ];
-raiju.possibility = 1;
+raiju.possibility = 0;
 
 const revenant = new Object();
 revenant.id = 13;
@@ -258,7 +258,7 @@ revenant.behaviour = [
     "During a hunt, if any player is in the LoS of the Revenant, it will move at approximately twice the standard ghost speed. If nobody is in LoS, it will move at approximately half the standard speed.",
     "Players can listen to its footstep sounds when hiding from the ghost; if it is comparatively slow, then it may be a Revenant. Note that footstep sounds are approximately synced with ghost speed, so players should be listening for footstep sounds that occur approximately half as often."
 ];
-revenant.possibility = 1;
+revenant.possibility = 0;
 
 const shade = new Object();
 shade.id = 14;
@@ -273,7 +273,7 @@ shade.behaviour = [
     "Shades tend to prefer the mist-type \"hissing\" ghost event over manifesting. If it does manifest, it will prefer (though not always have) the shadow-type ghost form.",
     "If summoned by a Summoning Circle, a Shade has a chance[verify]will appear as a shadow in the circle instead of a fully visible form."
 ];
-shade.possibility = 1;
+shade.possibility = 0;
 
 const spirit = new Object();
 spirit.id = 15;
@@ -284,7 +284,7 @@ spirit.tags = ['smudging'];
 spirit.behaviour = [
     "When smudged, spirits will not hunt for 180 seconds, as opposed to the standard 90 seconds. When testing for a Spirit, ensure that your average sanity is below 50% by reading it off the sanity monitor, or checking that it has hunted (or attempted to hunt) at least once. Then, smudge the ghost and count for 180 seconds. If the ghost hunts within 90 to 180 seconds, then it is not a Spirit. If it only hunts after the 180 seconds are up, then it is likely be a Spirit. To ensure that the smudge does not fail (causing the ghost to hunt much earlier than 90 seconds), wait for it to first use the crucifix, interact with an object, or use a motion sensor to locate it, then smudge the surrounding area."
 ];
-spirit.possibility = 1;
+spirit.possibility = 0;
 
 
 const the_mimic = new Object();
@@ -298,7 +298,7 @@ the_mimic.behaviour = [
     "The Mimic also has the ability to replicate other ghosts' abilities, such as the Obake's six-fingered handprint, or hunting sanity thresholds. This could be used against it if it presents an ability while also showing contradicting evidence (such as leaving a six-fingered handprint but creating freezing temperatures, which the Obake does not provide as evidence).",
     "The Mimic will occasionally change the ghost it decides to impersonate during the mission. This might betray The Mimic if the player notices the ghost demonstrating two completely different traits (such as noticing the ghost flickering slower like a Phantom during a hunt, when it was not doing so earlier). Note that the Mimic cannot switch traits during a hunt."
 ];
-the_mimic.possibility = 1;
+the_mimic.possibility = 0;
 
 const the_twins = new Object();
 the_twins.id = 17;
@@ -324,7 +324,7 @@ the_twins.behaviour = [
     "Note that crucifixes will only check for the main Twin when blocking hunts, regardless of which Twin attempted hunting. A hunt starting close to a working crucifix is a strong sign that it is the second Twin of the pair hunting.",
     "Each Twin has a different moving speed during hunts. The main Twin will be 10% slower than the standard ghost speed while the secondary Twin will be 10% faster. Noticing a subtle change in speed from one hunt to another might narrow down the ghost type."
 ];
-the_twins.possibility = 1;
+the_twins.possibility = 0;
 
 const wraith = new Object();
 wraith.id = 18;
@@ -337,7 +337,7 @@ wraith.behaviour = [
     "The Wraith stepping in salt also temporarily increases the average rate of interactions.",
     "Wraiths can teleport to a player outside hunts, generating an EMF Level 2 or 5 reading. If there is no other interaction nearby that would have caused an EMF 2/5 reading, it is possible that the ghost is a Wraith."
 ];
-wraith.possibility = 1;
+wraith.possibility = 0;
 
 const yokai = new Object();
 yokai.id = 19;
@@ -350,7 +350,7 @@ yokai.behaviour = [
     "During hunts, a Yokai can only sense voices and electronics within a 2-meter range. On Nightmare difficulty, this can be tested by standing into a room with a smudge stick handy (ideally far away from the door) and talking into the microphone or holding an active electronic equipment. If the ghost is nearby with no line-of-sight but does not enter the player's room despite the potential attraction, it is a good sign that it might be a Yokai. Be aware though that the ghost might also simply walk into the room by pure chance when roaming; multiple attempts might be needed to conclusively confirm or rule out the type of ghost.",
     "Continuously talking near a Yokai will increase the chance of interactions taking place."
 ];
-yokai.possibility = 1;
+yokai.possibility = 0;
 
 const yurei = new Object();
 yurei.id = 20;
@@ -363,7 +363,7 @@ yurei.behaviour = [
     "The Yurei prefers ghost events where it hisses over other types of ghost events.",
     "Using a smudge stick near the Yurei will prevent the ghost from wandering out of its ghost room for 90 seconds. Players can try placing a Motion Sensor at the doorway, and proceed to smudge the ghost. If the motion sensor is never set off by the ghost within the next 90 seconds, then the ghost could be a Yurei."
 ];
-yurei.possibility = 1;
+yurei.possibility = 0;
 
 // Ghost List
 const ghost_list = [banshee, demon, goryo, hantu, jinn, mare, myling, obake, oni, onryo, phantom, poltergeist, raiju, revenant, shade, spirit, the_mimic, the_twins, wraith, yokai, yurei];
@@ -402,4 +402,10 @@ export function ghost_details(ghost) {
         )
     }
     return info;
+}
+
+export function reset_possibilities() {
+    for (var i = 0; i < ghost_list.length; i++) {
+        ghost_list[i].possibility = 0;
+    }
 }

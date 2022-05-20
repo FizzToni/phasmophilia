@@ -1,5 +1,4 @@
 import './App.css';
-import GhostView from "./components/GhostView";
 import MainView from "./components/MainView"
 
 
