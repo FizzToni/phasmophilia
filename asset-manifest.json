@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.72447812.css",
-    "main.js": "/static/js/main.079c7e94.js",
-    "static/js/787.79014026.chunk.js": "/static/js/787.79014026.chunk.js",
-    "index.html": "/index.html",
-    "main.72447812.css.map": "/static/css/main.72447812.css.map",
-    "main.079c7e94.js.map": "/static/js/main.079c7e94.js.map",
-    "787.79014026.chunk.js.map": "/static/js/787.79014026.chunk.js.map"
+    "main.css": "/phasmophilia/static/css/main.72447812.css",
+    "main.js": "/phasmophilia/static/js/main.72704382.js",
+    "static/js/787.79014026.chunk.js": "/phasmophilia/static/js/787.79014026.chunk.js",
+    "index.html": "/phasmophilia/index.html",
+    "main.72447812.css.map": "/phasmophilia/static/css/main.72447812.css.map",
+    "main.72704382.js.map": "/phasmophilia/static/js/main.72704382.js.map",
+    "787.79014026.chunk.js.map": "/phasmophilia/static/js/787.79014026.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.72447812.css",
-    "static/js/main.079c7e94.js"
+    "static/js/main.72704382.js"
   ]
 }
