@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/phasmophilia/static/css/main.72447812.css",
-    "main.js": "/phasmophilia/static/js/main.72704382.js",
+    "main.js": "/phasmophilia/static/js/main.e3728f5d.js",
     "static/js/787.79014026.chunk.js": "/phasmophilia/static/js/787.79014026.chunk.js",
+    "static/media/image2vector.svg": "/phasmophilia/static/media/image2vector.6c72bd3f68c25f895cebf2497bddc2a4.svg",
     "index.html": "/phasmophilia/index.html",
     "main.72447812.css.map": "/phasmophilia/static/css/main.72447812.css.map",
-    "main.72704382.js.map": "/phasmophilia/static/js/main.72704382.js.map",
+    "main.e3728f5d.js.map": "/phasmophilia/static/js/main.e3728f5d.js.map",
     "787.79014026.chunk.js.map": "/phasmophilia/static/js/787.79014026.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.72447812.css",
-    "static/js/main.72704382.js"
+    "static/js/main.e3728f5d.js"
   ]
 }
