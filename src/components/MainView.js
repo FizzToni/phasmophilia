@@ -16,16 +16,41 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
 import {
-    AcUnitOutlined, BlurOnOutlined, ErrorOutline, MenuBookOutlined,
-    MicOffOutlined,
-    PanToolOutlined, RestartAltRounded,
-    ScatterPlotOutlined, SmokeFreeOutlined,
-    SpeakerPhoneOutlined, ExpandMoreRounded
+    AcUnitOutlined, BlurOnOutlined, ErrorOutline, MenuBookOutlined, MicOffOutlined, PanToolOutlined, RestartAltRounded,
+    ScatterPlotOutlined, SmokeFreeOutlined, SpeakerPhoneOutlined, ExpandMoreRounded, HistoryEduTwoTone
 } from "@mui/icons-material";
-
 import {Accordion, ListSubheader, AccordionSummary, AccordionDetails} from "@mui/material";
+
 import {ghost_details} from "./Ghosts";
 import * as ghosts from "./Ghosts";
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+const themeDark = createTheme({
+    palette: {
+        type: 'dark',
+        primary: {
+            main: '#212121',
+        },
+        secondary: {
+            main: '#ff0000',
+        },
+        background: {
+            default: '#5f0000',
+            paper: '#3a3a3a',
+        },
+        text: {
+            primary: '#ffffff',
+        },
+        warning: {
+            main: '#d70000',
+        },
+        action: {
+            main: '#8b8b8b',
+        }
+    },
+});
+
 
 const drawerWidth = 240;
 
@@ -94,6 +119,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
+
+
+
 let ghost_list = [];
 let collected_evidence = [];
 
@@ -142,242 +170,271 @@ export default function MiniDrawer() {
 
     const [chance, setChance] = React.useState(0);
     const handleEvidenceSelection = (ev_id) => {
+        if (nightmare) {
+            if (collected_evidence.length === 2) {
+                return;
+            }
+        }
         manage_evidence_collection(ev_id);
         setChance(collected_evidence.length);
-        console.log("chance: " + chance);
     };
+
+    const [nightmare, setNightmare] = React.useState(false);
+    const handleNightmare = () => {
+        setNightmare(!nightmare);
+        console.log("Nightmare mode: " + !nightmare);
+    }
 
     const handleReset = () => {
         window.location.reload();
     }
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <AppBar position="fixed" open={open}>
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        sx={{
-                            marginRight: 5,
-                            ...(open && { display: 'none' }),
-                        }}>
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        Quick Hunt
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer variant="permanent" open={open}>
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                    </IconButton>
-                </DrawerHeader>
-                <Divider />
-                <List
-                    subheader={
-                        <ListSubheader component="div" id="nested-list-subheader">
-                            {open ?  'Evidences' : 'EV'}
-                        </ListSubheader>
-                    }>
+        <ThemeProvider theme={themeDark}>
+            <Box sx={{ display: 'flex' }}>
+                <CssBaseline />
+                <AppBar position="fixed" open={open}>
+                    <Toolbar>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            sx={{
+                                marginRight: 5,
+                                ...(open && { display: 'none' }),
+                            }}>
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" noWrap component="div">
+                            Quick Hunt
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Drawer variant="permanent" open={open}>
+                    <DrawerHeader>
+                        <IconButton onClick={handleDrawerClose}>
+                            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                        </IconButton>
+                    </DrawerHeader>
+                    <Divider />
+                    <List
+                        subheader={
+                            <ListSubheader component="div" id="nested-list-subheader">
+                                {open ?  'Evidences' : 'EV'}
+                            </ListSubheader>
+                        }>
+                        <ListItemButton
+                            onClick={() => handleEvidenceSelection( 0)}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}>
+                            <PanToolOutlined color={collected_evidence.includes(0) ? 'warning' : 'action'}
+                                sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}/>
+                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Fingerprints"/>
+                        </ListItemButton>
 
-                    <ListItemButton
-                        onClick={() => handleEvidenceSelection( 0)}
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}>
-                        <PanToolOutlined sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                        }}/>
-                        <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Fingerprints"/>
-                    </ListItemButton>
+                        <ListItemButton
+                            onClick={() => handleEvidenceSelection( 1)}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}>
+                            <AcUnitOutlined color={collected_evidence.includes(1) ? 'warning' : 'action'}
+                                sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}/>
+                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Freezing Temperatures"/>
+                        </ListItemButton>
 
-                    <ListItemButton
-                        onClick={() => handleEvidenceSelection( 1)}
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}>
-                        <AcUnitOutlined sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                        }}/>
-                        <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Freezing Temperatures"/>
-                    </ListItemButton>
+                        <ListItemButton
+                            onClick={() => handleEvidenceSelection( 2)}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}>
+                            <ScatterPlotOutlined color={collected_evidence.includes(2) ? 'warning' : 'action'}
+                                sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}/>
+                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Ghost Orbs"/>
+                        </ListItemButton>
 
-                    <ListItemButton
-                        onClick={() => handleEvidenceSelection( 2)}
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}>
-                        <ScatterPlotOutlined sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                        }}/>
-                        <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Ghost Orbs"/>
-                    </ListItemButton>
+                        <ListItemButton
+                            onClick={() => handleEvidenceSelection( 3)}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}>
+                            <SpeakerPhoneOutlined color={collected_evidence.includes(3) ? 'warning' : 'action'}
+                                sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}/>
+                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="EMF 5"/>
+                        </ListItemButton>
 
-                    <ListItemButton
-                        onClick={() => handleEvidenceSelection( 3)}
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}>
-                        <SpeakerPhoneOutlined sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                        }}/>
-                        <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="EMF 5"/>
-                    </ListItemButton>
+                        <ListItemButton
+                            onClick={() => handleEvidenceSelection( 4)}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}>
+                            <BlurOnOutlined color={collected_evidence.includes(4) ? 'warning' : 'action'}
+                                sx={{
+                                marginRight: 24,
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}/>
+                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="D.O.T.S."/>
+                        </ListItemButton>
 
-                    <ListItemButton
-                        onClick={() => handleEvidenceSelection( 4)}
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}>
-                        <BlurOnOutlined sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                        }}/>
-                        <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="D.O.T.S."/>
-                    </ListItemButton>
+                        <ListItemButton
+                            onClick={() => handleEvidenceSelection( 5)}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}>
+                            <MenuBookOutlined color={collected_evidence.includes(5) ? 'warning' : 'action'}
+                                sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}/>
+                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Ghost Writings"/>
+                        </ListItemButton>
 
-                    <ListItemButton
-                        onClick={() => handleEvidenceSelection( 5)}
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}>
-                        <MenuBookOutlined sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                        }}/>
-                        <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Ghost Writings"/>
-                    </ListItemButton>
+                        <ListItemButton
+                            onClick={() => handleEvidenceSelection( 6)}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}>
+                            <MicOffOutlined color={collected_evidence.includes(6) ? 'warning' : 'action'}
+                                sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}/>
+                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Spirit Box"/>
+                        </ListItemButton>
 
-                    <ListItemButton
-                        onClick={() => handleEvidenceSelection( 6)}
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}>
-                        <MicOffOutlined sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                        }}/>
-                        <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Spirit Box"/>
-                    </ListItemButton>
-
-                </List>
-                <Divider/>
-                <List
-                    subheader={
-                        <ListSubheader component="div" id="nested-list-subheader">
-                            {open ?  'Tools' : 'T'}
-                        </ListSubheader>
-                    }>
-                    <ListItemButton
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}>
-                        <SmokeFreeOutlined sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                        }}/>
-                        <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Smudge Timer"/>
-                    </ListItemButton>
+                    </List>
                     <Divider/>
-                    <ListItemButton
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}>
-                        <ErrorOutline sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                        }}/>
-                        <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Nightmare Mode"/>
-                    </ListItemButton>
-                    <Divider/>
-                    <ListItemButton
-                        onClick={() => handleReset()}
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.5,
-                        }}>
-                        <RestartAltRounded sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                        }}/>
-                        <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Restart"/>
-                    </ListItemButton>
-                </List>
-            </Drawer>
+                    <List
+                        subheader={
+                            <ListSubheader component="div" id="nested-list-subheader">
+                                {open ?  'Tools' : 'T'}
+                            </ListSubheader>
+                        }>
 
-            <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
-                <DrawerHeader/>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}>
+                            <HistoryEduTwoTone
+                                sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}/>
+                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Tools"/>
+                        </ListItemButton>
 
-                <div>
-                    {ghost_list.map(function (ghost) {
-                        // noinspection JSValidateTypes
-                        return (
-                            <Accordion expanded={expanded === "panel"+(ghost.id)} hidden={!(chance === ghost.possibility)} onChange={handleAccordionChange("panel"+(ghost.id))}>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreRounded />}
-                                    aria-controls="panel1bh-content"
-                                    id="panel1bh-header">
+                        <Divider/>
 
-                                    <Typography sx={{ flexShrink: 0, minWidth: 100, textAlign: 'left' }}>{ghost.name}</Typography>
-                                    <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
-                                        {ghost.evidences_icons}
-                                    </Typography>
-                                </AccordionSummary>
+                        <ListItemButton
+                            onClick={handleNightmare}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}>
+                            <ErrorOutline color={nightmare ? 'warning' : 'text'}
+                                sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}/>
+                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Nightmare Mode"/>
+                        </ListItemButton>
 
-                                <AccordionDetails>
-                                    {ghost_details(ghost).map(function(detail, idx){
-                                        return (
-                                            <div key={idx}>
-                                                {detail}
-                                            </div>
-                                        )
-                                    })}
-                                </AccordionDetails>
-                            </Accordion>
-                        )
-                    })}
-                </div>
+                        <Divider/>
 
+                        <ListItemButton
+                            onClick={() => handleReset()}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}>
+                            <RestartAltRounded
+                                sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}/>
+                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Restart"/>
+                        </ListItemButton>
+
+                    </List>
+                </Drawer>
+
+                <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
+                    <DrawerHeader/>
+
+                    <div>
+                        {ghost_list.map(function (ghost) {
+                            // noinspection JSValidateTypes
+                            return (
+                                <Accordion expanded={expanded === "panel"+(ghost.id)} hidden={!(chance === ghost.possibility)} onChange={handleAccordionChange("panel"+(ghost.id))}>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreRounded />}
+                                        aria-controls="panel1bh-content"
+                                        id="panel1bh-header">
+
+                                        <Typography sx={{ flexShrink: 0, minWidth: 100, textAlign: 'left' }}>{ghost.name}</Typography>
+                                        <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
+                                            {ghost.evidences_icons}
+                                        </Typography>
+                                    </AccordionSummary>
+
+                                    <AccordionDetails>
+                                        {ghost_details(ghost).map(function(detail, idx){
+                                            return (
+                                                <div key={idx}>
+                                                    {detail}
+                                                </div>
+                                            )
+                                        })}
+                                    </AccordionDetails>
+                                </Accordion>
+                            )
+                        })}
+                    </div>
+
+                </Box>
             </Box>
-        </Box>
+        </ThemeProvider>
     );
 }
