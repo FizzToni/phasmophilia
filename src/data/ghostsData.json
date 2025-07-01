@@ -1,0 +1,256 @@
+{
+  "evidenceTypes": [
+    "Fingerprints",
+    "Freezing Temperatures", 
+    "Ghost Orbs",
+    "EMF Level 5",
+    "D.O.T.S Projector",
+    "Ghost Writing",
+    "Spirit Box"
+  ],
+  "ghosts": [
+    {
+      "id": 0,
+      "name": "Banshee",
+      "evidence": [0, 2, 4],
+      "tags": ["obsession", "sanity", "roaming", "singing", "shriek"],
+      "behaviour": [
+        "During hunts, a Banshee can only notice, chase, or kill one person at a time. If a hunting ghost seems to ignore nearby players to look for or chase a distant player, then the ghost is likely a Banshee; if it passes through one or more players without killing them while not under the effect of Smudge Sticks, a Banshee can be confirmed outright.\n If the Banshee's main target is not in the investigation area, it will chase and attempt to kill anyone it sees.",
+        "Banshees will only check their target's sanity level to initiate a hunt as opposed to the team's average sanity. A ghost being excessively aggressive (hunting often) despite a relatively high average sanity level, and vice-versa, might indicate a Banshee.",
+        "Banshees tend to roam towards the target player outside of hunts; ghost activity occurring more often than usual near a specific player and away from the ghost room is a good sign of a Banshee.",
+        "A Banshee is more likely to perform ghost events where it sings over other types of ghost events.",
+        "Banshees have a chance of emitting a unique type of shriek-like paranormal sounds on the parabolic microphone. Any player can consider taking one and aiming it in the general area of the ghost."
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Demon",
+      "evidence": [0, 1, 5],
+      "tags": ["early hunter", "hunt cooldown", "crucifix", "smudging"],
+      "behaviour": [
+        "Demons can begin hunting below an average sanity of 70%, compared to most other ghosts at 50%, with no pre-requisites to this threshold. Demons also have a rare ability to hunt at any sanity level.",
+        "Demons also have a minimum hunt cooldown of 20 seconds, as opposed to the standard 25 seconds of other ghosts.",
+        "Crucifixes have an effective range of 5 meters instead of the standard 3 meters. Having a lazily placed crucifix burn when the ghost would normally not have used it may indicate a Demon, though this strategy is flawed by the fact that ghosts may happen to wander out of their room and into the crucifix's range.",
+        "Smudging a Demon will prevent it from hunting for only 60 seconds, as opposed to 90 seconds with most other ghosts."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Goryo",
+      "evidence": [0, 4, 3],
+      "tags": ["D.O.T.S.", "roaming", "nightmare"],
+      "behaviour": [
+        "You will only be able to see the Goryo produce a D.O.T.S Projector-based silhouette through a video camera, and if there are no people in the ghost room. If a player sees the ghost interact with the projector on the camera or on the Video Feed, but the players at the location do not see it, then the ghost is likely a Goryo. Standing outside of the ghost room will suffice for allowing the ghost to appear through the projector. Note that its power does not apply to physical manifestations during a ghost event or a hunt; Goryos can physically manifest and be fully visible in this manner like any other ghost.",
+        "When not hunting, Goryo are less likely to roam around, and consequently stay in its ghost room more often. If the ghost tends to remain in its ghost room, including at the start of ghost events and hunts, with interactions mainly confined to the area in and around the ghost room, then it could be a Goryo. ",
+        "On Nightmare difficulty, the Goryo will always provide D.O.T.S projector as one of its two evidences. Not obtaining this piece of evidence in Nightmare rules the ghost out."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Hantu",
+      "evidence": [0, 1, 2],
+      "tags": ["speed", "fuse", "breath", "nightmare"],
+      "behaviour": [
+        "During a hunt, the Hantu has different speeds in rooms of different temperatures; it is fastest in cold rooms below 3°C (37.4°F) and slowest in warm rooms above 15°C (59°F). Additionally, the Hantu does not accelerate with line-of-sight, unlike most other ghosts. This may make it easy to identify in an extended chase, asides from possibly making it easier to escape if the room is warm enough. If you can easily loop the ghost without crouching in a warm room around a large furniture piece such as a kitchen counter, then the ghost is most likely a Hantu.",
+        "Hantu are twice more likely to turn off the fuse box; frequent outages might be a sign of a Hantu. On the other hand, Hantu will not turn the fuse box on; having the ghost turn the fuse box on eliminates Hantu as a possibility.",
+        "Hantu will also emit freezing breath in rooms below 3°C (37.4°F) when it manifests during a hunt. Note that this breath is visible only when the ghost is also physically visible, making it harder to see as the breath may be partially obscured by the ghost model.",
+        "On Nightmare difficulty, the Hantu will always provide Freezing Temperatures as one of its two evidences. Not obtaining this piece of evidence in Nightmare rules the ghost out."
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Jinn",
+      "evidence": [0, 1, 3],
+      "tags": ["sanity", "speed", "fuse"],
+      "behaviour": [
+        "Jinns have an ability that when used, can instantly decrease the sanity of all players within 3 meters of it by 25%.",
+        "If the breaker is on during a hunt and player is in the line of sight of the Jinn, it will chase the player at twice their regular speed until they are within about 2 meters of the player, thereafter chasing with the default speed. This can be tested by standing at the end of a long hallway or room, then waiting for the ghost to achieve line-of-sight from the other end. If its speed increases instantly and not over a period of time, then it is likely a Jinn. Be careful not to confuse this with the Revenant; the Jinn's speed is normal if it is not chasing a player, unlike the Revenant.",
+        "Both of the abilities listed above can be disabled by turning off the breaker. Consequently, a Jinn never turns the fuse box off by itself, though the breaker can still be tripped by overloading it with lights. If the breaker is not turned off despite high ghost activity for a long period of time, the ghost could be a Jinn, though this should not be used as definitive proof. Conversely, if the ghost turns the breaker off directly, it cannot be a Jinn."
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Mare",
+      "evidence": [5, 2, 6],
+      "tags": ["early hunter", "lights", "interactions", "lights", "shattering lights", "roamer"],
+      "behaviour": [
+        "Mares have an increased hunting threshold of 60% if the lights in its room are off. On the other hand, turning on the lights on in its room will decrease its sanity threshold to 40%.",
+        "Mares have a chance of turning the lights off immediately if a player turns one on in the vicinity. Spamming the light switch will not trigger this interaction, so this is best utilized with some time between switching the lights on/off. This interaction will give off an EMF 2 reading. Note that any ghost can do so purely by coincidence. Ghost events do not count for this ability.",
+        "Mares will have decreased interaction activity if its current room is lit.",
+        "Mares never turn individual lights on; a ghost doing so confirms that it is not a Mare. Mares do not have any special mechanic regarding fuse boxes, and can turn them on or off.",
+        "Mares are more likely to choose manifestation events where it shatters the lights, rendering them unusable.",
+        "Mares have a high chance to roam long ranges if the lights are on in the room."
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Myling",
+      "evidence": [0, 5, 3],
+      "tags": ["quiet hunter", "frequent sounds"],
+      "behaviour": [
+        "Mylings have quieter footsteps than other ghosts during a hunt. Throw any electronic equipment on the ground next to the player and listen; if footsteps can only be heard within the range that electronics begin to flicker (about 10 meters), then the ghost may be a Myling. This test only applies when the ghost is on the same floor as the player.",
+        "Players can hear paranormal sounds, such as murmuring or growling, by pointing a Parabolic Microphone at an idle ghost. If these sounds are more frequent than usual, the ghost may be a Myling."
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Obake",
+      "evidence": [0, 2, 3],
+      "tags": ["fingerprints", "shape shifter", "nightmare"],
+      "behaviour": [
+        "When an Obake interacts with a surface that allows for fingerprints, there is a 75% chance that it will leave fingerprints, as opposed to the 100% chance for all other ghosts. Separately, Obake may also use an ability that halves the remaining duration of existing fingerprints on the map, potentially causing them to disappear within seconds of appearing.",
+        "In addition, there is a 16.6% chance that it will leave a special fingerprint not seen with other ghosts. These consist of having six-fingered fingerprints instead of five, two fingerprints on light switches instead of one, and five fingerprints on keyboards and Prison cell block gates instead of four.",
+        "On Nightmare difficulty, the Obake will always provide Fingerprints as one of its two evidences. Not obtaining this piece of evidence in Nightmare rules the ghost out."
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Oni",
+      "evidence": [1, 4, 3],
+      "tags": ["activity", "manifestation", "strength"],
+      "behaviour": [
+        "Onis have increased activity if there are multiple players in the same room as the ghost.",
+        "Onis are more likely to perform the airball type manifestation, especially when there are players in the same room.",
+        "Oni cannot perform the \"vanishing type\" ghost events like most other ghosts. In this event, the ghost may turn invisible and hunt near a player before returning to its position. If this type of event does not occur, the ghost may be an Oni, though this is not a sure-fire test."
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Onryo",
+      "evidence": [1, 2, 6],
+      "tags": ["candles", "flame extinguishing", "activity"],
+      "behaviour": [
+        "Onryos are more likely to hunt if there are no flames (lit candles, fireplace, or campfire) around.",
+        "When near the Onryo, candles are more likely to be blown out than usual.",
+        "In the presence of 3 or more flames, Onryos will be unable to hunt and will extinguish one of the flames. This interaction will reduce the player's sanity by 10%.",
+        "Onryos have increased activity around flames."
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Phantom",
+      "evidence": [0, 6, 4],
+      "tags": ["photos", "sight", "visibility"],
+      "behaviour": [
+        "Looking at a Phantom for too long during a ghost event will drop your sanity considerably more than other ghosts.",
+        "Unlike other ghosts, taking a photo of the Phantom during a ghost event will cause it to disappear.",
+        "Phantoms have a much shorter physical visibility during hunts, and will only be visible intermittently."
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Poltergeist",
+      "evidence": [0, 5, 6],
+      "tags": ["objects", "multi interactions", "throwing"],
+      "behaviour": [
+        "Poltergeists can throw multiple objects at once, and with much more force than other ghosts.",
+        "Poltergeists will interact with objects at a much higher rate than other ghosts.",
+        "Poltergeists have a special ability to throw all objects in a room if 3 or more props are available to throw, dropping everyone's sanity by 2% per prop thrown.",
+        "Poltergeists can reduce sanity by throwing objects at players."
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Raiju",
+      "evidence": [2, 4, 3],
+      "tags": ["speed", "electronics", "hunt threshold"],
+      "behaviour": [
+        "When electronic equipment is close to a Raiju (on), it can hunt at an increased sanity threshold of up to 65% instead of the standard 50%.",
+        "During a hunt, the Raiju will travel at a faster speed when it is near active electronic equipment.",
+        "The Raiju interferes with electronics from a greater distance (up to 15 meters) compared to other ghosts' 10 meters."
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Revenant",
+      "evidence": [5, 1, 2],
+      "tags": ["speed", "slow", "fast"],
+      "behaviour": [
+        "During a hunt, the Revenant will move considerably slower if it cannot see a player (about 1 m/s).",
+        "However, if the Revenant can see a player during a hunt, it will move considerably faster than other ghosts (about 3 m/s).",
+        "Unlike other ghosts, the Revenant will not lose line of sight easily once it has seen a player."
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Shade",
+      "evidence": [5, 1, 3],
+      "tags": ["shy", "manifestation", "summoning"],
+      "behaviour": [
+        "Shades are much less likely to perform ghost events or interactions if there are multiple players nearby.",
+        "Shades will not hunt if there are multiple players in the same room.",
+        "Shades are more likely to manifest as a shadow during ghost events.",
+        "If summoned by a Summoning Circle, a Shade has a chance will appear as a shadow in the circle instead of a fully visible form."
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Spirit",
+      "evidence": [5, 6, 3],
+      "tags": ["smudging"],
+      "behaviour": [
+        "Spirits have no special characteristics other than being affected more by Smudge Sticks.",
+        "Smudging a Spirit will prevent it from hunting for 180 seconds instead of the standard 90 seconds."
+      ]
+    },
+    {
+      "id": 16,
+      "name": "The Mimic",
+      "evidence": [0, 1, 6],
+      "tags": ["mimic", "false evidence", "orbs"],
+      "behaviour": [
+        "The Mimic can copy the abilities and traits of other ghosts at will, including speed, hunting thresholds, and special abilities.",
+        "The Mimic will always produce Ghost Orbs as fake evidence, even if orbs are not part of its evidence set.",
+        "The Mimic is the only ghost that can copy another ghost's ability during hunts.",
+        "On Nightmare difficulty, if Ghost Orbs are found, but the ghost's evidence does not include orbs, it is guaranteed to be The Mimic."
+      ]
+    },
+    {
+      "id": 17,
+      "name": "The Twins",
+      "evidence": [1, 6, 3],
+      "tags": ["interactions", "speed", "hunt cooldown"],
+      "behaviour": [
+        "The Twins can interact with the environment and the players from two separate locations simultaneously.",
+        "One twin will move faster during hunts (110% speed) while the other moves slower (90% speed).",
+        "The Twins have either a shorter (20 seconds) or longer (30 seconds) hunt cooldown.",
+        "Interactions will happen at different rates depending on which Twin is present."
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Wraith",
+      "evidence": [6, 4, 3],
+      "tags": ["teleporting", "salt", "toxicity"],
+      "behaviour": [
+        "Wraiths have the ability to teleport to players and travel through walls.",
+        "Wraiths do not leave UV footprints after stepping in salt.",
+        "Wraiths have an aversion to salt and will have increased activity if it steps in salt.",
+        "Wraiths do not affect UV footprints, making it harder to track them."
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Yokai",
+      "evidence": [2, 6, 4],
+      "tags": ["talking", "early hunter", "hearing"],
+      "behaviour": [
+        "The Yokai is more likely to hunt when players are talking nearby (within 2 meters).",
+        "During hunts, the Yokai can only hear players' voices when they are within 2 meters of it.",
+        "The Yokai is more active when players are talking nearby.",
+        "Players talking near a Yokai will increase its hunting threshold and activity level."
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Yurei",
+      "evidence": [1, 2, 4],
+      "tags": ["sanity", "door closing", "smudging"],
+      "behaviour": [
+        "The Yurei has a special ability where it will drop all the sanity of all players within 7.5 meters of it by 13%, while also closing a door sharply at the same time. Noticing a door sharply close from being fully open is a very strong sign of a Yurei. Keep in mind that this ability does not count as an actual ghost event and Yurei can still perform regular ghost events like any other ghost.",
+        "The Yurei prefers ghost events where it hisses over other types of ghost events.",
+        "Using a smudge stick near the Yurei will prevent the ghost from wandering out of its ghost room for 90 seconds. Players can try placing a Motion Sensor at the doorway, and proceed to smudge the ghost. If the motion sensor is never set off by the ghost within the next 90 seconds, then the ghost could be a Yurei."
+      ]
+    }
+  ]
+}

@@ -17,7 +17,7 @@ import ListItemText from '@mui/material/ListItemText';
 
 import {
     AcUnitOutlined, BlurOnOutlined, ErrorOutline, MenuBookOutlined, MicOffOutlined, PanToolOutlined, RestartAltRounded,
-    ScatterPlotOutlined, SmokeFreeOutlined, SpeakerPhoneOutlined, ExpandMoreRounded, HistoryEduTwoTone
+    ScatterPlotOutlined, SpeakerPhoneOutlined, ExpandMoreRounded, HistoryEduTwoTone
 } from "@mui/icons-material";
 import {Accordion, ListSubheader, AccordionSummary, AccordionDetails} from "@mui/material";
 
@@ -407,7 +407,7 @@ export default function MiniDrawer() {
                         {ghost_list.map(function (ghost) {
                             // noinspection JSValidateTypes
                             return (
-                                <Accordion expanded={expanded === "panel"+(ghost.id)} hidden={!(chance === ghost.possibility)} onChange={handleAccordionChange("panel"+(ghost.id))}>
+                                <Accordion key={ghost.id} expanded={expanded === "panel"+(ghost.id)} hidden={!(chance === ghost.possibility)} onChange={handleAccordionChange("panel"+(ghost.id))}>
                                     <AccordionSummary
                                         expandIcon={<ExpandMoreRounded />}
                                         aria-controls="panel1bh-content"
