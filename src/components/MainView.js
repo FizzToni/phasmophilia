@@ -16,8 +16,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
 import {
-    AcUnitOutlined, BlurOnOutlined, ErrorOutline, MenuBookOutlined, MicOffOutlined, PanToolOutlined, RestartAltRounded,
-    ScatterPlotOutlined, SpeakerPhoneOutlined, ExpandMoreRounded, HistoryEduTwoTone
+    AcUnitOutlined, BlurOnOutlined, MenuBookOutlined, MicOffOutlined, FingerprintOutlined, RestartAltRounded,
+    RemoveRedEyeOutlined, RadioOutlined, ExpandMoreRounded, BuildOutlined, DarkModeOutlined
 } from "@mui/icons-material";
 import {Accordion, ListSubheader, AccordionSummary, AccordionDetails} from "@mui/material";
 
@@ -28,26 +28,99 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const themeDark = createTheme({
     palette: {
-        type: 'dark',
+        mode: 'dark',
         primary: {
-            main: '#212121',
+            main: '#1a1a2e',
+            light: '#2a2a3e',
+            dark: '#0f0f1a',
         },
         secondary: {
-            main: '#ff0000',
+            main: '#e94560',
+            light: '#ff6b7a',
+            dark: '#b71c3c',
         },
         background: {
-            default: '#5f0000',
-            paper: '#3a3a3a',
+            default: '#0f0f23',
+            paper: '#1a1a2e',
         },
         text: {
-            primary: '#ffffff',
+            primary: '#e8e8e8',
+            secondary: '#b8b8b8',
         },
         warning: {
-            main: '#d70000',
+            main: '#f39c12',
+            light: '#f5b041',
+            dark: '#d68910',
+        },
+        success: {
+            main: '#27ae60',
+            light: '#58d68d',
+            dark: '#1e8449',
+        },
+        info: {
+            main: '#3498db',
+            light: '#5dade2',
+            dark: '#2980b9',
+        },
+        error: {
+            main: '#e74c3c',
+            light: '#ec7063',
+            dark: '#c0392b',
         },
         action: {
-            main: '#8b8b8b',
-        }
+            active: '#e8e8e8',
+            hover: 'rgba(232, 232, 232, 0.08)',
+            selected: 'rgba(233, 69, 96, 0.12)',
+            disabled: 'rgba(232, 232, 232, 0.26)',
+            disabledBackground: 'rgba(232, 232, 232, 0.12)',
+        },
+        divider: 'rgba(232, 232, 232, 0.12)',
+    },
+    components: {
+        MuiDrawer: {
+            styleOverrides: {
+                paper: {
+                    background: 'linear-gradient(180deg, #1a1a2e 0%, #16213e 100%)',
+                    borderRight: '1px solid rgba(233, 69, 96, 0.2)',
+                },
+            },
+        },
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    background: 'linear-gradient(90deg, #1a1a2e 0%, #16213e 100%)',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                },
+            },
+        },
+        MuiListItemButton: {
+            styleOverrides: {
+                root: {
+                    '&:hover': {
+                        backgroundColor: 'rgba(233, 69, 96, 0.08)',
+                    },
+                    '&.Mui-selected': {
+                        backgroundColor: 'rgba(233, 69, 96, 0.12)',
+                    },
+                },
+            },
+        },
+        MuiAccordion: {
+            styleOverrides: {
+                root: {
+                    background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+                    border: '1px solid rgba(233, 69, 96, 0.2)',
+                    borderRadius: '8px !important',
+                    margin: '8px 0',
+                    '&:before': {
+                        display: 'none',
+                    },
+                    '&.Mui-expanded': {
+                        boxShadow: '0 4px 12px rgba(233, 69, 96, 0.2)',
+                    },
+                },
+            },
+        },
     },
 });
 
@@ -231,7 +304,7 @@ export default function MiniDrawer() {
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
                             }}>
-                            <PanToolOutlined color={collected_evidence.includes(0) ? 'warning' : 'action'}
+                            <FingerprintOutlined color={collected_evidence.includes(0) ? 'success' : 'action'}
                                 sx={{
                                 minWidth: 0,
                                 mr: open ? 3 : 'auto',
@@ -247,7 +320,7 @@ export default function MiniDrawer() {
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
                             }}>
-                            <AcUnitOutlined color={collected_evidence.includes(1) ? 'warning' : 'action'}
+                            <AcUnitOutlined color={collected_evidence.includes(1) ? 'success' : 'action'}
                                 sx={{
                                 minWidth: 0,
                                 mr: open ? 3 : 'auto',
@@ -263,7 +336,7 @@ export default function MiniDrawer() {
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
                             }}>
-                            <ScatterPlotOutlined color={collected_evidence.includes(2) ? 'warning' : 'action'}
+                            <RemoveRedEyeOutlined color={collected_evidence.includes(2) ? 'success' : 'action'}
                                 sx={{
                                 minWidth: 0,
                                 mr: open ? 3 : 'auto',
@@ -279,7 +352,7 @@ export default function MiniDrawer() {
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
                             }}>
-                            <SpeakerPhoneOutlined color={collected_evidence.includes(3) ? 'warning' : 'action'}
+                            <RadioOutlined color={collected_evidence.includes(3) ? 'success' : 'action'}
                                 sx={{
                                 minWidth: 0,
                                 mr: open ? 3 : 'auto',
@@ -295,7 +368,7 @@ export default function MiniDrawer() {
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
                             }}>
-                            <BlurOnOutlined color={collected_evidence.includes(4) ? 'warning' : 'action'}
+                            <BlurOnOutlined color={collected_evidence.includes(4) ? 'success' : 'action'}
                                 sx={{
                                 marginRight: 24,
                                 minWidth: 0,
@@ -312,7 +385,7 @@ export default function MiniDrawer() {
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
                             }}>
-                            <MenuBookOutlined color={collected_evidence.includes(5) ? 'warning' : 'action'}
+                            <MenuBookOutlined color={collected_evidence.includes(5) ? 'success' : 'action'}
                                 sx={{
                                 minWidth: 0,
                                 mr: open ? 3 : 'auto',
@@ -328,7 +401,7 @@ export default function MiniDrawer() {
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
                             }}>
-                            <MicOffOutlined color={collected_evidence.includes(6) ? 'warning' : 'action'}
+                            <MicOffOutlined color={collected_evidence.includes(6) ? 'success' : 'action'}
                                 sx={{
                                 minWidth: 0,
                                 mr: open ? 3 : 'auto',
@@ -352,7 +425,7 @@ export default function MiniDrawer() {
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
                             }}>
-                            <HistoryEduTwoTone
+                            <BuildOutlined
                                 sx={{
                                 minWidth: 0,
                                 mr: open ? 3 : 'auto',
@@ -370,7 +443,7 @@ export default function MiniDrawer() {
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
                             }}>
-                            <ErrorOutline color={nightmare ? 'warning' : 'text'}
+                            <DarkModeOutlined color={nightmare ? 'warning' : 'action'}
                                 sx={{
                                 minWidth: 0,
                                 mr: open ? 3 : 'auto',
