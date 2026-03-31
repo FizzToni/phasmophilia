@@ -78,3 +78,17 @@ test('clear search button clears query', () => {
   expect(searchInput).toHaveValue('');
   expect(screen.queryByRole('button', { name: /clear ghost search/i })).not.toBeInTheDocument();
 });
+
+test('clear search keeps input focused for quick re-entry', () => {
+  render(<App />);
+
+  const searchInput = screen.getByLabelText(/search ghosts/i);
+  fireEvent.change(searchInput, { target: { value: 'oni' } });
+
+  const clearButton = screen.getByRole('button', { name: /clear ghost search/i });
+  fireEvent.mouseDown(clearButton);
+  fireEvent.click(clearButton);
+
+  expect(searchInput).toHaveValue('');
+  expect(searchInput).toHaveFocus();
+});

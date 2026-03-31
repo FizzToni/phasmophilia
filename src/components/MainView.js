@@ -290,6 +290,11 @@ export default function MiniDrawer() {
         setGhostList(getAllGhosts());
     };
 
+    const handleClearSearch = () => {
+        setSearchTerm('');
+        searchInputRef.current?.focus();
+    };
+
     const visibleGhosts = ghostList.filter((ghost) => {
         if (chance !== ghost.possibility) {
             return false;
@@ -449,7 +454,8 @@ export default function MiniDrawer() {
                                     <InputAdornment position="end">
                                         <IconButton
                                             aria-label="Clear ghost search"
-                                            onClick={() => setSearchTerm('')}
+                                            onMouseDown={(event) => event.preventDefault()}
+                                            onClick={handleClearSearch}
                                             edge="end">
                                             <CloseRounded />
                                         </IconButton>
