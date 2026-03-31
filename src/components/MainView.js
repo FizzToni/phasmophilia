@@ -203,6 +203,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 export default function MiniDrawer() {
     const theme = useTheme();
+    const searchInputRef = React.useRef(null);
     const [open, setOpen] = React.useState(false);
     const [ghostList, setGhostList] = React.useState([]);
     const [collectedEvidence, setCollectedEvidence] = React.useState([]);
@@ -235,6 +236,21 @@ export default function MiniDrawer() {
 
     React.useEffect(() => {
         setGhostList(getAllGhosts());
+    }, []);
+
+    React.useEffect(() => {
+        const handleGlobalSearchFocus = (event) => {
+            const targetTag = event.target?.tagName;
+            const isTypingContext = targetTag === 'INPUT' || targetTag === 'TEXTAREA' || event.target?.isContentEditable;
+            if (isTypingContext || event.key !== '/' || event.metaKey || event.ctrlKey || event.altKey) {
+                return;
+            }
+            event.preventDefault();
+            searchInputRef.current?.focus();
+        };
+
+        window.addEventListener('keydown', handleGlobalSearchFocus);
+        return () => window.removeEventListener('keydown', handleGlobalSearchFocus);
     }, []);
 
     const manageEvidenceCollection = (evidenceId) => {
@@ -422,6 +438,7 @@ export default function MiniDrawer() {
                             label="Search ghosts"
                             value={searchTerm}
                             onChange={(event) => setSearchTerm(event.target.value)}
+                            inputRef={searchInputRef}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">

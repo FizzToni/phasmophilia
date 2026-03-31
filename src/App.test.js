@@ -54,3 +54,13 @@ test('search filters visible ghosts and reset clears search', () => {
   expect(searchInput).toHaveValue('');
   expect(screen.getByText(/showing 21 ghosts/i)).toBeInTheDocument();
 });
+
+test('slash key focuses search input', () => {
+  render(<App />);
+
+  const searchInput = screen.getByLabelText(/search ghosts/i);
+  expect(searchInput).not.toHaveFocus();
+
+  fireEvent.keyDown(window, { key: '/' });
+  expect(searchInput).toHaveFocus();
+});
