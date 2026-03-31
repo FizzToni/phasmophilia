@@ -37,3 +37,20 @@ test('restart clears selected evidence without reloading page', () => {
   fireEvent.click(restartButton);
   expect(fingerprintsButton).toHaveAttribute('aria-pressed', 'false');
 });
+
+test('search filters visible ghosts and reset clears search', () => {
+  render(<App />);
+
+  const searchInput = screen.getByLabelText(/search ghosts/i);
+  expect(screen.getByText(/showing 21 ghosts/i)).toBeInTheDocument();
+
+  fireEvent.change(searchInput, { target: { value: 'banshee' } });
+  expect(screen.getByText(/showing 1 ghost/i)).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /banshee details/i })).toBeInTheDocument();
+
+  const restartButton = screen.getByRole('button', { name: /restart/i });
+  fireEvent.click(restartButton);
+
+  expect(searchInput).toHaveValue('');
+  expect(screen.getByText(/showing 21 ghosts/i)).toBeInTheDocument();
+});

@@ -8,6 +8,7 @@ import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -17,9 +18,9 @@ import ListItemText from '@mui/material/ListItemText';
 
 import {
     AcUnitOutlined, BlurOnOutlined, MenuBookOutlined, MicOffOutlined, FingerprintOutlined, RestartAltRounded,
-    RemoveRedEyeOutlined, RadioOutlined, ExpandMoreRounded, BuildOutlined, DarkModeOutlined
+    RemoveRedEyeOutlined, RadioOutlined, ExpandMoreRounded, BuildOutlined, DarkModeOutlined, SearchRounded
 } from "@mui/icons-material";
-import {Accordion, ListSubheader, AccordionSummary, AccordionDetails} from "@mui/material";
+import {Accordion, ListSubheader, AccordionSummary, AccordionDetails, InputAdornment} from "@mui/material";
 
 import { getAllGhosts, getGhostDetails } from "./Ghosts";
 
@@ -205,6 +206,7 @@ export default function MiniDrawer() {
     const [open, setOpen] = React.useState(false);
     const [ghostList, setGhostList] = React.useState([]);
     const [collectedEvidence, setCollectedEvidence] = React.useState([]);
+    const [searchTerm, setSearchTerm] = React.useState('');
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -266,10 +268,26 @@ export default function MiniDrawer() {
     const handleReset = () => {
         setNightmare(false);
         setCollectedEvidence([]);
+        setSearchTerm('');
         setChance(0);
         setExpanded(false);
         setGhostList(getAllGhosts());
     };
+
+    const visibleGhosts = ghostList.filter((ghost) => {
+        if (chance !== ghost.possibility) {
+            return false;
+        }
+        if (!searchTerm.trim()) {
+            return true;
+        }
+
+        const normalizedTerm = searchTerm.toLowerCase();
+        return (
+            ghost.name.toLowerCase().includes(normalizedTerm) ||
+            ghost.tags.some((tag) => tag.toLowerCase().includes(normalizedTerm))
+        );
+    });
 
     return (
         <ThemeProvider theme={themeDark}>
@@ -397,10 +415,31 @@ export default function MiniDrawer() {
                 <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
                     <DrawerHeader/>
 
+                    <Box sx={{ px: 2, pt: 1 }}>
+                        <TextField
+                            size="small"
+                            fullWidth
+                            label="Search ghosts"
+                            value={searchTerm}
+                            onChange={(event) => setSearchTerm(event.target.value)}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchRounded />
+                                    </InputAdornment>
+                                )
+                            }}
+                        />
+                        <Typography
+                            sx={{ mt: 1, color: 'text.secondary', textAlign: 'left' }}
+                            aria-live="polite"
+                            aria-label={`Visible ghosts count: ${visibleGhosts.length}`}>
+                            Showing {visibleGhosts.length} ghost{visibleGhosts.length === 1 ? '' : 's'}
+                        </Typography>
+                    </Box>
+
                     <div>
-                        {ghostList
-                            .filter((ghost) => chance === ghost.possibility)
-                            .map((ghost) => (
+                        {visibleGhosts.map((ghost) => (
                                 <Accordion
                                     key={ghost.id}
                                     expanded={expanded === `panel${ghost.id}`}
@@ -426,6 +465,11 @@ export default function MiniDrawer() {
                                     </AccordionDetails>
                                 </Accordion>
                             ))}
+                        {visibleGhosts.length === 0 && (
+                            <Typography sx={{ p: 2, color: 'text.secondary', textAlign: 'left' }}>
+                                No ghosts match your filters.
+                            </Typography>
+                        )}
                     </div>
 
                 </Box>
