@@ -18,7 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 
 import {
     AcUnitOutlined, BlurOnOutlined, MenuBookOutlined, MicOffOutlined, FingerprintOutlined, RestartAltRounded,
-    RemoveRedEyeOutlined, RadioOutlined, ExpandMoreRounded, BuildOutlined, DarkModeOutlined, SearchRounded
+    RemoveRedEyeOutlined, RadioOutlined, ExpandMoreRounded, BuildOutlined, DarkModeOutlined, SearchRounded, CloseRounded
 } from "@mui/icons-material";
 import {Accordion, ListSubheader, AccordionSummary, AccordionDetails, InputAdornment} from "@mui/material";
 
@@ -444,13 +444,22 @@ export default function MiniDrawer() {
                                     <InputAdornment position="start">
                                         <SearchRounded />
                                     </InputAdornment>
-                                )
+                                ),
+                                endAdornment: searchTerm ? (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="Clear ghost search"
+                                            onClick={() => setSearchTerm('')}
+                                            edge="end">
+                                            <CloseRounded />
+                                        </IconButton>
+                                    </InputAdornment>
+                                ) : null
                             }}
                         />
                         <Typography
                             sx={{ mt: 1, color: 'text.secondary', textAlign: 'left' }}
-                            aria-live="polite"
-                            aria-label={`Visible ghosts count: ${visibleGhosts.length}`}>
+                            aria-live="polite">
                             Showing {visibleGhosts.length} ghost{visibleGhosts.length === 1 ? '' : 's'}
                         </Typography>
                     </Box>

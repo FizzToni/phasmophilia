@@ -64,3 +64,17 @@ test('slash key focuses search input', () => {
   fireEvent.keyDown(window, { key: '/' });
   expect(searchInput).toHaveFocus();
 });
+
+test('clear search button clears query', () => {
+  render(<App />);
+
+  const searchInput = screen.getByLabelText(/search ghosts/i);
+  fireEvent.change(searchInput, { target: { value: 'oni' } });
+  expect(searchInput).toHaveValue('oni');
+
+  const clearButton = screen.getByRole('button', { name: /clear ghost search/i });
+  fireEvent.click(clearButton);
+
+  expect(searchInput).toHaveValue('');
+  expect(screen.queryByRole('button', { name: /clear ghost search/i })).not.toBeInTheDocument();
+});
