@@ -21,8 +21,7 @@ import {
 } from "@mui/icons-material";
 import {Accordion, ListSubheader, AccordionSummary, AccordionDetails} from "@mui/material";
 
-import {ghost_details} from "./Ghosts";
-import * as ghosts from "./Ghosts";
+import { getAllGhosts, getGhostDetails } from "./Ghosts";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
@@ -126,6 +125,16 @@ const themeDark = createTheme({
 
 
 const drawerWidth = 240;
+const NIGHTMARE_MAX_EVIDENCE = 2;
+const EVIDENCE_ITEMS = [
+    { id: 0, label: 'Fingerprints', Icon: FingerprintOutlined },
+    { id: 1, label: 'Freezing Temperatures', Icon: AcUnitOutlined },
+    { id: 2, label: 'Ghost Orbs', Icon: RemoveRedEyeOutlined },
+    { id: 3, label: 'EMF 5', Icon: RadioOutlined },
+    { id: 4, label: 'D.O.T.S.', Icon: BlurOnOutlined },
+    { id: 5, label: 'Ghost Writings', Icon: MenuBookOutlined },
+    { id: 6, label: 'Spirit Box', Icon: MicOffOutlined },
+];
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -191,42 +200,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
         }),
     }),
 );
-
-
-
-
-let ghost_list = [];
-let collected_evidence = [];
-
-export function init_ghost_hunt() {
-    ghost_list = (ghosts.get_all_ghosts());
-}
-
-export function manage_evidence_collection(evidence_id) {
-    if (collected_evidence.includes(evidence_id)) {
-        const index = collected_evidence.indexOf(evidence_id);
-        collected_evidence.splice(index, 1);
-    }
-    else {
-        collected_evidence.push(evidence_id);
-    }
-    console.clear();
-    console.log("collected evidence: " + collected_evidence + "\ncollected_evidence.length: " + collected_evidence.length);
-    ghost_list.forEach(function (ghost) {
-        ghost.possibility = 0;
-        collected_evidence.forEach(function (evidence) {
-            if (ghost.evidence.includes(evidence)) {
-                ghost.possibility++;
-            }
-        });
-        console.log(ghost.name + ": " + ghost.possibility);
-    });
-}
-
 export default function MiniDrawer() {
-    init_ghost_hunt();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [ghostList, setGhostList] = React.useState([]);
+    const [collectedEvidence, setCollectedEvidence] = React.useState([]);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -242,25 +220,56 @@ export default function MiniDrawer() {
     };
 
     const [chance, setChance] = React.useState(0);
-    const handleEvidenceSelection = (ev_id) => {
-        if (nightmare) {
-            if (collected_evidence.length === 2) {
-                return;
-            }
+    const updateGhostPossibilities = React.useCallback((selectedEvidence) => {
+        setChance(selectedEvidence.length);
+        if (selectedEvidence.length === 0) {
+            setExpanded(false);
         }
-        manage_evidence_collection(ev_id);
-        setChance(collected_evidence.length);
+        setGhostList((currentGhosts) => currentGhosts.map((ghost) => ({
+            ...ghost,
+            possibility: selectedEvidence.filter((evidenceId) => ghost.evidence.includes(evidenceId)).length
+        })));
+    }, []);
+
+    React.useEffect(() => {
+        setGhostList(getAllGhosts());
+    }, []);
+
+    const manageEvidenceCollection = (evidenceId) => {
+        const nextEvidence = collectedEvidence.includes(evidenceId)
+            ? collectedEvidence.filter((id) => id !== evidenceId)
+            : [...collectedEvidence, evidenceId];
+
+        setCollectedEvidence(nextEvidence);
+        updateGhostPossibilities(nextEvidence);
+    };
+
+    const handleEvidenceSelection = (evId) => {
+        if (nightmare && !collectedEvidence.includes(evId) && collectedEvidence.length === NIGHTMARE_MAX_EVIDENCE) {
+            return;
+        }
+        manageEvidenceCollection(evId);
     };
 
     const [nightmare, setNightmare] = React.useState(false);
     const handleNightmare = () => {
-        setNightmare(!nightmare);
-        console.log("Nightmare mode: " + !nightmare);
-    }
+        const nextNightmare = !nightmare;
+        setNightmare(nextNightmare);
+
+        if (nextNightmare && collectedEvidence.length > NIGHTMARE_MAX_EVIDENCE) {
+            const nextEvidence = collectedEvidence.slice(0, NIGHTMARE_MAX_EVIDENCE);
+            setCollectedEvidence(nextEvidence);
+            updateGhostPossibilities(nextEvidence);
+        }
+    };
 
     const handleReset = () => {
-        window.location.reload();
-    }
+        setNightmare(false);
+        setCollectedEvidence([]);
+        setChance(0);
+        setExpanded(false);
+        setGhostList(getAllGhosts());
+    };
 
     return (
         <ThemeProvider theme={themeDark}>
@@ -279,14 +288,17 @@ export default function MiniDrawer() {
                             }}>
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" noWrap component="div">
+                        <Typography variant="h6" noWrap component="h1">
                             Quick Hunt
                         </Typography>
                     </Toolbar>
                 </AppBar>
                 <Drawer variant="permanent" open={open}>
                     <DrawerHeader>
-                        <IconButton onClick={handleDrawerClose}>
+                        <IconButton
+                            onClick={handleDrawerClose}
+                            aria-label="Close navigation drawer"
+                            sx={{ minWidth: 48, minHeight: 48, p: 1 }}>
                             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                         </IconButton>
                     </DrawerHeader>
@@ -297,118 +309,27 @@ export default function MiniDrawer() {
                                 {open ?  'Evidences' : 'EV'}
                             </ListSubheader>
                         }>
-                        <ListItemButton
-                            onClick={() => handleEvidenceSelection( 0)}
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
-                            }}>
-                            <FingerprintOutlined color={collected_evidence.includes(0) ? 'success' : 'action'}
+                        {EVIDENCE_ITEMS.map(({ id, label, Icon }) => (
+                            <ListItemButton
+                                key={id}
+                                onClick={() => handleEvidenceSelection(id)}
+                                aria-label={`Toggle ${label}`}
+                                aria-pressed={collectedEvidence.includes(id)}
                                 sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
-                            }}/>
-                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Fingerprints"/>
-                        </ListItemButton>
-
-                        <ListItemButton
-                            onClick={() => handleEvidenceSelection( 1)}
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
-                            }}>
-                            <AcUnitOutlined color={collected_evidence.includes(1) ? 'success' : 'action'}
-                                sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
-                            }}/>
-                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Freezing Temperatures"/>
-                        </ListItemButton>
-
-                        <ListItemButton
-                            onClick={() => handleEvidenceSelection( 2)}
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
-                            }}>
-                            <RemoveRedEyeOutlined color={collected_evidence.includes(2) ? 'success' : 'action'}
-                                sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
-                            }}/>
-                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Ghost Orbs"/>
-                        </ListItemButton>
-
-                        <ListItemButton
-                            onClick={() => handleEvidenceSelection( 3)}
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
-                            }}>
-                            <RadioOutlined color={collected_evidence.includes(3) ? 'success' : 'action'}
-                                sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
-                            }}/>
-                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="EMF 5"/>
-                        </ListItemButton>
-
-                        <ListItemButton
-                            onClick={() => handleEvidenceSelection( 4)}
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
-                            }}>
-                            <BlurOnOutlined color={collected_evidence.includes(4) ? 'success' : 'action'}
-                                sx={{
-                                marginRight: 24,
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
-                            }}/>
-                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="D.O.T.S."/>
-                        </ListItemButton>
-
-                        <ListItemButton
-                            onClick={() => handleEvidenceSelection( 5)}
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
-                            }}>
-                            <MenuBookOutlined color={collected_evidence.includes(5) ? 'success' : 'action'}
-                                sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
-                            }}/>
-                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Ghost Writings"/>
-                        </ListItemButton>
-
-                        <ListItemButton
-                            onClick={() => handleEvidenceSelection( 6)}
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
-                            }}>
-                            <MicOffOutlined color={collected_evidence.includes(6) ? 'success' : 'action'}
-                                sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
-                            }}/>
-                            <ListItemText sx={{ opacity: open ? 1 : 0 }}  primary="Spirit Box"/>
-                        </ListItemButton>
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                }}>
+                                <Icon
+                                    color={collectedEvidence.includes(id) ? 'success' : 'action'}
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}/>
+                                <ListItemText sx={{ opacity: open ? 1 : 0 }} primary={label}/>
+                            </ListItemButton>
+                        ))}
 
                     </List>
                     <Divider/>
@@ -477,14 +398,18 @@ export default function MiniDrawer() {
                     <DrawerHeader/>
 
                     <div>
-                        {ghost_list.map(function (ghost) {
-                            // noinspection JSValidateTypes
-                            return (
-                                <Accordion key={ghost.id} expanded={expanded === "panel"+(ghost.id)} hidden={!(chance === ghost.possibility)} onChange={handleAccordionChange("panel"+(ghost.id))}>
+                        {ghostList
+                            .filter((ghost) => chance === ghost.possibility)
+                            .map((ghost) => (
+                                <Accordion
+                                    key={ghost.id}
+                                    expanded={expanded === `panel${ghost.id}`}
+                                    onChange={handleAccordionChange(`panel${ghost.id}`)}>
                                     <AccordionSummary
                                         expandIcon={<ExpandMoreRounded />}
-                                        aria-controls="panel1bh-content"
-                                        id="panel1bh-header">
+                                        aria-controls={`panel${ghost.id}-content`}
+                                        id={`panel${ghost.id}-header`}
+                                        aria-label={`${ghost.name} details`}>
 
                                         <Typography sx={{ flexShrink: 0, minWidth: 100, textAlign: 'left' }}>{ghost.name}</Typography>
                                         <Typography sx={{ flexGrow:1, color: 'text.secondary', textAlign: 'center'}}>
@@ -493,17 +418,14 @@ export default function MiniDrawer() {
                                     </AccordionSummary>
 
                                     <AccordionDetails>
-                                        {ghost_details(ghost).map(function(detail, idx){
-                                            return (
-                                                <div key={idx}>
-                                                    {detail}
-                                                </div>
-                                            )
-                                        })}
+                                        {getGhostDetails(ghost).map((detail, idx) => (
+                                            <div key={idx}>
+                                                {detail}
+                                            </div>
+                                        ))}
                                     </AccordionDetails>
                                 </Accordion>
-                            )
-                        })}
+                            ))}
                     </div>
 
                 </Box>

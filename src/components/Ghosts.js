@@ -15,16 +15,21 @@ function createGhostObjects() {
     }));
 }
 
-// Ghost List
-const ghost_list = createGhostObjects();
+const ghostList = createGhostObjects();
 
 // Functions
-export function get_all_ghosts() {
-    return ghost_list;
+export function getAllGhosts() {
+    return ghostList.map((ghost) => ({
+        ...ghost,
+        evidence: [...ghost.evidence],
+        tags: [...ghost.tags],
+        behaviour: [...ghost.behaviour],
+        possibility: 0,
+    }));
 }
 
-export function get_ghost(name) {
-    let ghost = ghost_list.find(function(ghost) {
+export function getGhost(name) {
+    const ghost = ghostList.find(function(ghost) {
         return ghost.name.toUpperCase() === name.toUpperCase();
     });
     return(
@@ -32,8 +37,8 @@ export function get_ghost(name) {
     );
 }
 
-export function get_ghosts_by_evidence(evidence) {
-    let ghosts = ghost_list.filter(function(ghost) {
+export function getGhostsByEvidence(evidence) {
+    const ghosts = ghostList.filter(function(ghost) {
         return ghost.evidence.includes(evidence);
     });
     return(
@@ -42,8 +47,8 @@ export function get_ghosts_by_evidence(evidence) {
 
 }
 
-export function ghost_details(ghost) {
-    let info = [];
+export function getGhostDetails(ghost) {
+    const info = [];
 
     for (let i = 0; i < ghost.tags.length; i++) {
         info.push(
@@ -55,7 +60,13 @@ export function ghost_details(ghost) {
 }
 
 export function reset_possibilities() {
-    for (let i = 0; i < ghost_list.length; i++) {
-        ghost_list[i].possibility = 0;
+    for (let i = 0; i < ghostList.length; i++) {
+        ghostList[i].possibility = 0;
     }
 }
+
+// Legacy exports for backward compatibility
+export const get_all_ghosts = getAllGhosts;
+export const get_ghost = getGhost;
+export const get_ghosts_by_evidence = getGhostsByEvidence;
+export const ghost_details = getGhostDetails;
